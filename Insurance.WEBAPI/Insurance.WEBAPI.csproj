@@ -16,11 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\Insurance.BLL\Insurance.BLL.csproj" />
       <ProjectReference Include="..\Insurance.Infrastracture\Insurance.Infrastracture.csproj" />
+      <ProjectReference Include="..\Insurance.Repositories\Insurance.Repositories.csproj" />
     </ItemGroup>
 
 </Project>

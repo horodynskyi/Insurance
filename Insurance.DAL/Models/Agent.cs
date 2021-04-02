@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Insurance.DAL.Interfaces;
 
 namespace Insurance.DAL.Models

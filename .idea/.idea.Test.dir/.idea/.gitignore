@@ -2,12 +2,12 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
+/.idea.Test.iml
 /modules.xml
 /contentModel.xml
-/.idea.Insurance.iml
 /projectSettingsUpdater.xml
 # Datasource local storage ignored files
-/../../../../../../../:\ЧНУ\Course\Test\.idea\.idea.Insurance\.idea/dataSources/
+/../../../../../../../:\ЧНУ\Course\Test\.idea\.idea.Test.dir\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

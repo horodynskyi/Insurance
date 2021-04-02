@@ -5,7 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-     
+      <ProjectReference Include="..\Insurance.DAL\Insurance.DAL.csproj" />
+      <ProjectReference Include="..\Insurance.Repositories\Insurance.Repositories.csproj" />
     </ItemGroup>
 
 </Project>

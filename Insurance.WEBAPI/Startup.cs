@@ -1,4 +1,10 @@
+using Insurance.BLL.Interfaces;
+using Insurance.BLL.Services;
 using Insurance.Infrastracture.Infrastracture;
+using Insurance.Repositories.Interfaces;
+using Insurance.Repositories.Interfaces.IRepositories;
+using Insurance.Repositories.Repositories;
+using Insurance.Repositories.Repositories.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +31,21 @@ namespace Insurance.WEBAPI
             services.AddDbContext<InsuranceDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("EFConnection"),
                 b => b.MigrationsAssembly("Insurance.WEBAPI")));
+
+            #region Services
+
+            services.AddTransient<IRiskService, RiskService>();
+            
+
+            #endregion
+
+            #region Repositories
+
+            services.AddTransient<IRiskRepository, RiskRepository>();
+
+            #endregion
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Insurance.WEBAPI", Version = "v1"}); });
         }

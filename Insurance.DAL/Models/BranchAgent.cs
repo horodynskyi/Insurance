@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Insurance.DAL.Models
 {
-    [Keyless]
+    
     public class BranchAgent
     {
         

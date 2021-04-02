@@ -17,6 +17,7 @@ namespace Insurance.Repositories.Repositories
         public async Task Create(TEntity entity)
         {
             await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TEntity>> Get()
