@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Insurance.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../:\ЧНУ\Course\Insurance\.idea\.idea.Insurance\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
