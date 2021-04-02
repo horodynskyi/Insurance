@@ -2,9 +2,10 @@ using Insurance.DAL.Interfaces;
 
 namespace Insurance.DAL.Models
 {
-    public class TerminatedContract:IEntity<int>
+    public class TerminatedContract
     {
-        public int id { get; set; }
+        public Contract contract { get; set; }
         public Reason reason { get; set; }
+        
     }
 }

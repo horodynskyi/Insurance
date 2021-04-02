@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
 using Insurance.DAL.Interfaces;
 
 namespace Insurance.DAL.Models
 {
     public class Agent:IEntity<int>
     {
+      
         public int id { get; set; }
         public string firstName { get; set; }
         public string secondName { get; set; }
