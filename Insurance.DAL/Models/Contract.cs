@@ -7,10 +7,10 @@ namespace Insurance.DAL.Models
     {
         public int id { get; set; }
         public DateTime dateTime { get; set; }
-        public int riskId { get; set; }
-        public int tariffId { get; set; }
-        public int typeInsuranceId { get; set; }
-        public int branchId { get; set; }
-        public int agentId { get; set; }
+        public Risk risk { get; set; }
+        public Tariff tariff { get; set; }
+        public TypeInsurance typeInsurance { get; set; }
+        public Branch branch { get; set; }
+        public Agent agent { get; set; }
     }
 }
