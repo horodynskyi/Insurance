@@ -29,5 +29,19 @@ namespace Insurance.WEBAPI.Controllers
         {
             await _riskService.Create(risk);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _riskService.GetById(id);
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Risk risk, int id)
+        {
+            await _riskService.Update(risk, id);
+            return Ok(risk);
+        }
     }
 }

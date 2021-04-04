@@ -37,6 +37,9 @@ namespace Insurance.WEBAPI
             #region Services
 
             services.AddTransient<IRiskService, RiskService>();
+            services.AddTransient<IContractService, ContractService>();
+            services.AddTransient<IAgentService, AgentService>();
+           
             
 
             #endregion
@@ -44,6 +47,14 @@ namespace Insurance.WEBAPI
             #region Repositories
 
             services.AddTransient<IRiskRepository, RiskRepository>();
+            services.AddTransient<IAgentRepository, AgentRepository>();
+            services.AddTransient<IBranchRepository, BranchRepository>();
+            services.AddTransient<IBranchAgentRepository, BranchAgentRepository>();
+            services.AddTransient<ITariffRepository, TariffRepository>();
+            services.AddTransient<ITerminatedContractRepository, TerminatedContractRepository>();
+            services.AddTransient<IContractRepository, ContractRepository>();
+            services.AddTransient<IReasonRepository, ReasonRepository>();
+            services.AddTransient<ITypeInsuranceRepository, TypeInsuranceRepository>();
 
             #endregion
 
