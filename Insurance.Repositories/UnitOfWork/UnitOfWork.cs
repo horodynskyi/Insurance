@@ -1,7 +1,7 @@
-using Insurance.Repositories.Interfaces;
 using Insurance.Repositories.Interfaces.IRepositories;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 
-namespace Insurance.Repositories.Repositories
+namespace Insurance.Repositories.UnitOfWork
 {
     public class UnitOfWork:IUnitOfWork
     {

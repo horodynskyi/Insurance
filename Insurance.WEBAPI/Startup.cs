@@ -5,6 +5,8 @@ using Insurance.Repositories.Interfaces;
 using Insurance.Repositories.Interfaces.IRepositories;
 using Insurance.Repositories.Repositories;
 using Insurance.Repositories.Repositories.Repositories;
+using Insurance.Repositories.UnitOfWork;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
