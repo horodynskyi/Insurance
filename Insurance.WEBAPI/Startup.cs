@@ -1,9 +1,8 @@
 using Insurance.BLL.Interfaces;
 using Insurance.BLL.Services;
+using Insurance.DTO.Mapper;
 using Insurance.Infrastracture.Infrastracture;
-using Insurance.Repositories.Interfaces;
 using Insurance.Repositories.Interfaces.IRepositories;
-using Insurance.Repositories.Repositories;
 using Insurance.Repositories.Repositories.Repositories;
 using Insurance.Repositories.UnitOfWork;
 using Insurance.Repositories.UnitOfWork.Interfaces;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace Insurance.WEBAPI
 {
@@ -29,18 +29,27 @@ namespace Insurance.WEBAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+
+            #region InsuranceContext
             services.AddDbContext<InsuranceDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("EFConnection"),
                 b => b.MigrationsAssembly("Insurance.WEBAPI")));
+            #endregion
+            
+            #region Authentication
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options =>
+                {
+                    options.ApiName = "myApi";
+                    options.Authority = "https://localhost:44303";
+                });
+            #endregion
 
             #region Services
 
             services.AddTransient<IRiskService, RiskService>();
             services.AddTransient<IContractService, ContractService>();
             services.AddTransient<IAgentService, AgentService>();
-           
-            
 
             #endregion
 
@@ -58,9 +67,29 @@ namespace Insurance.WEBAPI
 
             #endregion
 
+            #region AutoMapper
+            services.AddAutoMapper(typeof(AutoMapping));
+            #endregion
+            
+            #region UnitOfWork
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            #endregion
+
+            #region Controllers
+
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Insurance.WEBAPI", Version = "v1"}); });
+
+            #endregion
+
+            #region Swagger
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Insurance.WEBAPI", Version = "v1"});
+            });
+
+            #endregion
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +106,7 @@ namespace Insurance.WEBAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

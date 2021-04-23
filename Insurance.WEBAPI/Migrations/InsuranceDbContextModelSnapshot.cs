@@ -21,245 +21,245 @@ namespace Insurance.WEBAPI.Migrations
 
             modelBuilder.Entity("Insurance.DAL.Models.Agent", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("patronumic")
+                    b.Property<string>("Patronumic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("salary")
+                    b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("secondName")
+                    b.Property<string>("SecondName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Agents");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Branch", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("address")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("phoneNumber")
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.BranchAgent", b =>
                 {
-                    b.Property<int?>("agentid")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("branchid")
+                    b.Property<int?>("BranchId")
                         .HasColumnType("int");
 
-                    b.HasIndex("agentid");
+                    b.HasIndex("AgentId");
 
-                    b.HasIndex("branchid");
+                    b.HasIndex("BranchId");
 
                     b.ToTable("BranchAgents");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Contract", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("agentid")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("branchid")
+                    b.Property<int?>("BranchId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("dateTime")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("riskid")
+                    b.Property<int?>("RiskId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("tariffid")
+                    b.Property<int?>("TariffId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("typeInsuranceid")
+                    b.Property<int?>("TypeInsuranceId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("agentid");
+                    b.HasIndex("AgentId");
 
-                    b.HasIndex("branchid");
+                    b.HasIndex("BranchId");
 
-                    b.HasIndex("riskid");
+                    b.HasIndex("RiskId");
 
-                    b.HasIndex("tariffid");
+                    b.HasIndex("TariffId");
 
-                    b.HasIndex("typeInsuranceid");
+                    b.HasIndex("TypeInsuranceId");
 
                     b.ToTable("Contracts");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Reason", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("paid")
+                    b.Property<float>("Paid")
                         .HasColumnType("real");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Reasons");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Risk", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("sum")
+                    b.Property<decimal>("Sum")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Risks");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Tariff", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("wageRate")
+                    b.Property<decimal>("WageRate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Tariffs");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
                 {
-                    b.Property<int?>("contractid")
+                    b.Property<int?>("ContractId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("reasonid")
+                    b.Property<int?>("ReasonId")
                         .HasColumnType("int");
 
-                    b.HasIndex("contractid")
+                    b.HasIndex("ContractId")
                         .IsUnique()
-                        .HasFilter("[contractid] IS NOT NULL");
+                        .HasFilter("[ContractId] IS NOT NULL");
 
-                    b.HasIndex("reasonid");
+                    b.HasIndex("ReasonId");
 
                     b.ToTable("TerminatedContracts");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.TypeInsurance", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("TypeInsurances");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.BranchAgent", b =>
                 {
-                    b.HasOne("Insurance.DAL.Models.Agent", "agent")
+                    b.HasOne("Insurance.DAL.Models.Agent", "Agent")
                         .WithMany()
-                        .HasForeignKey("agentid");
+                        .HasForeignKey("AgentId");
 
-                    b.HasOne("Insurance.DAL.Models.Branch", "branch")
+                    b.HasOne("Insurance.DAL.Models.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("branchid");
+                        .HasForeignKey("BranchId");
 
-                    b.Navigation("agent");
+                    b.Navigation("Agent");
 
-                    b.Navigation("branch");
+                    b.Navigation("Branch");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Contract", b =>
                 {
-                    b.HasOne("Insurance.DAL.Models.Agent", "agent")
+                    b.HasOne("Insurance.DAL.Models.Agent", "Agent")
                         .WithMany()
-                        .HasForeignKey("agentid");
+                        .HasForeignKey("AgentId");
 
-                    b.HasOne("Insurance.DAL.Models.Branch", "branch")
+                    b.HasOne("Insurance.DAL.Models.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("branchid");
+                        .HasForeignKey("BranchId");
 
-                    b.HasOne("Insurance.DAL.Models.Risk", "risk")
+                    b.HasOne("Insurance.DAL.Models.Risk", "Risk")
                         .WithMany()
-                        .HasForeignKey("riskid");
+                        .HasForeignKey("RiskId");
 
-                    b.HasOne("Insurance.DAL.Models.Tariff", "tariff")
+                    b.HasOne("Insurance.DAL.Models.Tariff", "Tariff")
                         .WithMany()
-                        .HasForeignKey("tariffid");
+                        .HasForeignKey("TariffId");
 
-                    b.HasOne("Insurance.DAL.Models.TypeInsurance", "typeInsurance")
+                    b.HasOne("Insurance.DAL.Models.TypeInsurance", "TypeInsurance")
                         .WithMany()
-                        .HasForeignKey("typeInsuranceid");
+                        .HasForeignKey("TypeInsuranceId");
 
-                    b.Navigation("agent");
+                    b.Navigation("Agent");
 
-                    b.Navigation("branch");
+                    b.Navigation("Branch");
 
-                    b.Navigation("risk");
+                    b.Navigation("Risk");
 
-                    b.Navigation("tariff");
+                    b.Navigation("Tariff");
 
-                    b.Navigation("typeInsurance");
+                    b.Navigation("TypeInsurance");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
                 {
-                    b.HasOne("Insurance.DAL.Models.Contract", "contract")
+                    b.HasOne("Insurance.DAL.Models.Contract", "Contract")
                         .WithOne()
-                        .HasForeignKey("Insurance.DAL.Models.TerminatedContract", "contractid");
+                        .HasForeignKey("Insurance.DAL.Models.TerminatedContract", "ContractId");
 
-                    b.HasOne("Insurance.DAL.Models.Reason", "reason")
+                    b.HasOne("Insurance.DAL.Models.Reason", "Reason")
                         .WithMany()
-                        .HasForeignKey("reasonid");
+                        .HasForeignKey("ReasonId");
 
-                    b.Navigation("contract");
+                    b.Navigation("Contract");
 
-                    b.Navigation("reason");
+                    b.Navigation("Reason");
                 });
 #pragma warning restore 612, 618
         }

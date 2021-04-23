@@ -5,12 +5,12 @@ namespace Insurance.DAL.Models
 {
     public class Contract:IEntity<int>
     {
-        public int id { get; set; }
-        public DateTime dateTime { get; set; }
-        public Risk risk { get; set; }
-        public Tariff tariff { get; set; }
-        public TypeInsurance typeInsurance { get; set; }
-        public Branch branch { get; set; }
-        public Agent agent { get; set; }
+        public int Id { get; set; }
+        public DateTime DateTime { get; set; }
+        public Risk Risk { get; set; }
+        public Tariff Tariff { get; set; }
+        public TypeInsurance TypeInsurance { get; set; }
+        public Branch Branch { get; set; }
+        public Agent Agent { get; set; }
     }
 }

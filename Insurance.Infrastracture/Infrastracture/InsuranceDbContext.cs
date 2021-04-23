@@ -33,6 +33,8 @@ namespace Insurance.Infrastracture.Infrastracture
             modelBuilder.ApplyConfiguration(new TerminatedContractConfiguration());
             modelBuilder.ApplyConfiguration(new BranchAgentConfiguration());
             modelBuilder.ApplyConfiguration(new RiskConfiguration());
+          
+              
         }
     }
 }

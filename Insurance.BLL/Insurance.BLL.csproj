@@ -6,7 +6,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Insurance.DAL\Insurance.DAL.csproj" />
+      <ProjectReference Include="..\Insurance.DTO\Insurance.DTO.csproj" />
       <ProjectReference Include="..\Insurance.Repositories\Insurance.Repositories.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
     </ItemGroup>
 
 </Project>

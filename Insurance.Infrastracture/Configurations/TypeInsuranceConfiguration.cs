@@ -8,7 +8,7 @@ namespace Insurance.Infrastracture.Configurations
     {
         public void Configure(EntityTypeBuilder<TypeInsurance> builder)
         {
-            builder.HasKey(x => x.id);
+            builder.HasKey(x => x.Id);
         }
     }
 }

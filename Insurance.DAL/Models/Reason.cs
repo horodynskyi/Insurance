@@ -4,8 +4,8 @@ namespace Insurance.DAL.Models
 {
     public class Reason:IEntity<int>
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public float paid { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public float Paid { get; set; }
     }
 }

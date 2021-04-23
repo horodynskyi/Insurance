@@ -8,12 +8,12 @@ namespace Insurance.Infrastracture.Configurations
     {
         public void Configure(EntityTypeBuilder<Contract> builder)
         {
-            builder.HasKey(x => x.id);
-            builder.HasOne(x => x.risk).WithMany();
-            builder.HasOne(x => x.tariff).WithMany();
-            builder.HasOne(x => x.typeInsurance).WithMany();
-            builder.HasOne(x => x.branch).WithMany();
-            builder.HasOne(x => x.agent).WithMany();
+            builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Risk).WithMany();
+            builder.HasOne(x => x.Tariff).WithMany();
+            builder.HasOne(x => x.TypeInsurance).WithMany();
+            builder.HasOne(x => x.Branch).WithMany();
+            builder.HasOne(x => x.Agent).WithMany();
         }
     }
 }

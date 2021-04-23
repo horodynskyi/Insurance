@@ -6,7 +6,7 @@ namespace Insurance.DAL.Models
     public class BranchAgent
     {
         
-        public Agent agent { get; set; }
-        public Branch branch { get; set; }
+        public Agent Agent { get; set; }
+        public Branch Branch { get; set; }
     }
 }

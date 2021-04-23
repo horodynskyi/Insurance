@@ -9,8 +9,8 @@ namespace Insurance.Infrastracture.Configurations
         public void Configure(EntityTypeBuilder<BranchAgent> builder)
         {
             builder.HasNoKey();
-            builder.HasOne(x => x.agent).WithMany();
-            builder.HasOne(x => x.branch).WithMany();
+            builder.HasOne(x => x.Agent).WithMany();
+            builder.HasOne(x => x.Branch).WithMany();
         }
     }
 }

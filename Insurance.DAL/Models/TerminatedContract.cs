@@ -4,8 +4,8 @@ namespace Insurance.DAL.Models
 {
     public class TerminatedContract
     {
-        public Contract contract { get; set; }
-        public Reason reason { get; set; }
+        public Contract Contract { get; set; }
+        public Reason Reason { get; set; }
         
     }
 }
