@@ -9,8 +9,8 @@ namespace Insurance.Infrastracture.Configurations
         public void Configure(EntityTypeBuilder<TerminatedContract> builder)
         {
             builder.HasNoKey();
-            builder.HasOne(x => x.contract).WithOne();
-            builder.HasOne(x => x.reason).WithMany();
+            builder.HasOne(x => x.Contract).WithOne();
+            builder.HasOne(x => x.Reason).WithMany();
         }
     }
 }

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
+using Insurance.DTO.DTO;
+using Insurance.DTO.Mapper;
 using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
@@ -9,13 +12,16 @@ namespace Insurance.BLL.Services
     public class ContractService:IContractService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ContractService(IUnitOfWork unitOfWork)
+        private readonly IMapper _autoMapper;
+        public ContractService(IUnitOfWork unitOfWork, IMapper autoMapper)
         {
             _unitOfWork = unitOfWork;
+            _autoMapper = autoMapper;
         }
 
-        public async Task Create(Contract contract)
+        public async Task Create(ContractDTO contractDto)
         {
+            var contract = _autoMapper.Map<Contract>(contractDto);
             await _unitOfWork.ContractRepository.Create(contract);
         }
 

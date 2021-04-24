@@ -4,7 +4,7 @@ namespace Insurance.DAL.Models
 {
     public class Risk:IEntity<int>
     {
-        public int id { get; set; }
-        public decimal sum { get; set; }
+        public int Id { get; set; }
+        public decimal Sum { get; set; }
     }
 }

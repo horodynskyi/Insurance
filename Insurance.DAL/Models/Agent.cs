@@ -4,11 +4,10 @@ namespace Insurance.DAL.Models
 {
     public class Agent:IEntity<int>
     {
-      
-        public int id { get; set; }
-        public string firstName { get; set; }
-        public string secondName { get; set; }
-        public string patronumic { get; set; }
-        public decimal salary { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string Patronumic { get; set; }
+        public decimal Salary { get; set; }
     }
 }
