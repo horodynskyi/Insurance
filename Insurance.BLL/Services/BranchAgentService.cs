@@ -3,14 +3,15 @@ using System.Threading.Tasks;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.Repositories.UnitOfWork;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
 {
     public class BranchAgentService:IBranchAgentService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BranchAgentService(UnitOfWork unitOfWork)
+        public BranchAgentService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

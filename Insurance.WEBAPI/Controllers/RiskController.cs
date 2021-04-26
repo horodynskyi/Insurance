@@ -9,7 +9,7 @@ namespace Insurance.WEBAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/Risk")]
-    [Authorize]
+    //[Authorize]
     public class RiskController : Controller
     {
         private readonly IRiskService _riskService;

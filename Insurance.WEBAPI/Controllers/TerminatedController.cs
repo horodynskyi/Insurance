@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
+using Insurance.DTO.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +15,12 @@ namespace Insurance.WEBAPI.Controllers
     public class TerminatedController : Controller
     {
         private readonly ITerminatedContractService _terminated;
+        private readonly IMapper _mapper;
 
-        public TerminatedController(ITerminatedContractService terminated)
+        public TerminatedController(ITerminatedContractService terminated, IMapper mapper)
         {
             _terminated = terminated;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,9 +38,10 @@ namespace Insurance.WEBAPI.Controllers
         }
 
         [HttpPost]
-        public async Task Add(TerminatedContract terminatedContract)
+        public async Task Add(TerminatedContractDto terminatedContractDto)
         {
-            await _terminated.Create(terminatedContract);
+            var terminated = _mapper.Map<TerminatedContract>(terminatedContractDto);
+            await _terminated.Create(terminated);
         }
         
         

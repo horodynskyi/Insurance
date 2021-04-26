@@ -7,6 +7,7 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="10.1.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.0.4" />
         <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-preview.2.21154.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.2.21154.2">
@@ -22,6 +23,7 @@
       <ProjectReference Include="..\Insurance.BLL\Insurance.BLL.csproj" />
       <ProjectReference Include="..\Insurance.Infrastracture\Insurance.Infrastracture.csproj" />
       <ProjectReference Include="..\Insurance.Repositories\Insurance.Repositories.csproj" />
+      <ProjectReference Include="..\Insurance.Validation\Insurance.Validation.csproj" />
     </ItemGroup>
 
 </Project>

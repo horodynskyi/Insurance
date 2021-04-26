@@ -3,14 +3,15 @@ using System.Threading.Tasks;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.Repositories.UnitOfWork;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
 {
     public class TerminatedContractService:ITerminatedContractService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TerminatedContractService(UnitOfWork unitOfWork)
+        public TerminatedContractService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -9,7 +9,7 @@ namespace Insurance.Repositories.Repositories
 {
     public class GenericRepository<TEntity,TId>:IGenericRepository<TEntity,TId> where TEntity:class
     {
-        private readonly InsuranceDbContext _context;
+        protected readonly InsuranceDbContext _context;
         public GenericRepository(InsuranceDbContext context)
         {
             _context = context;

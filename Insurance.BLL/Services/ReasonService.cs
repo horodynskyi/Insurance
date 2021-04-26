@@ -3,14 +3,15 @@ using System.Threading.Tasks;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.Repositories.UnitOfWork;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
 {
     public class ReasonService:IReasonService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ReasonService(UnitOfWork unitOfWork)
+        public ReasonService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
@@ -13,10 +15,12 @@ namespace Insurance.WEBAPI.Controllers
     public class ContractController : Controller
     {
         private readonly IContractService _contractService;
+        private readonly IMapper _mapper;
 
-        public ContractController(IContractService contractService)
+        public ContractController(IContractService contractService, IMapper mapper)
         {
             _contractService = contractService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,9 +38,11 @@ namespace Insurance.WEBAPI.Controllers
         }
 
         [HttpPost]
-        public async Task Add(ContractDTO contractDto)
+        public async Task<IActionResult> Add(ContractDTO contractDto)
         {
-            await _contractService.Create(contractDto);
+            var contract = _mapper.Map<Contract>(contractDto);
+            await _contractService.Create(contract);
+            return Ok();
         }
     }
 }

@@ -3,7 +3,7 @@ using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.Repositories.UnitOfWork
 {
-    public class UnitOfWork:IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         public UnitOfWork(IRiskRepository riskRepository, IContractRepository contractRepository, IBranchRepository branchRepository, IReasonRepository reasonRepository, ITariffRepository tariffRepository, IBranchAgentRepository branchAgentRepository, ITerminatedContractRepository terminatedContractRepository, ITypeInsuranceRepository typeInsuranceRepository, IAgentRepository agentRepository)
         {
@@ -17,7 +17,7 @@ namespace Insurance.Repositories.UnitOfWork
             TypeInsuranceRepository = typeInsuranceRepository;
             AgentRepository = agentRepository;
         }
-
+        
         public IRiskRepository RiskRepository { get; }
         public IContractRepository ContractRepository { get; }
         public IBranchRepository BranchRepository { get; }

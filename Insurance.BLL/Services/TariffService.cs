@@ -3,14 +3,15 @@ using System.Threading.Tasks;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.Repositories.UnitOfWork;
+using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
 {
     public class TariffService:ITariffService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TariffService(UnitOfWork unitOfWork)
+        public TariffService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

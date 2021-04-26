@@ -1,5 +1,6 @@
 using Insurance.DAL.Models;
 using Insurance.Infrastracture.Configurations;
+using Insurance.Infrastracture.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace Insurance.Infrastracture.Infrastracture
@@ -8,7 +9,7 @@ namespace Insurance.Infrastracture.Infrastracture
     {
         public InsuranceDbContext(DbContextOptions<InsuranceDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Contract> Contracts { get; set; }
@@ -24,6 +25,8 @@ namespace Insurance.Infrastracture.Infrastracture
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            #region Relations
             modelBuilder.ApplyConfiguration(new AgentConfiguration());
             modelBuilder.ApplyConfiguration(new ContractConfiguration());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
@@ -33,6 +36,16 @@ namespace Insurance.Infrastracture.Infrastracture
             modelBuilder.ApplyConfiguration(new TerminatedContractConfiguration());
             modelBuilder.ApplyConfiguration(new BranchAgentConfiguration());
             modelBuilder.ApplyConfiguration(new RiskConfiguration());
+            #endregion
+
+            #region Seeds
+            modelBuilder.ApplyConfiguration(new AgentSeeds());
+            modelBuilder.ApplyConfiguration(new BranchSeeds());
+            modelBuilder.ApplyConfiguration(new ReasonSeeds());
+            modelBuilder.ApplyConfiguration(new RiskSeeds());
+            modelBuilder.ApplyConfiguration(new TariffSeeds());
+            modelBuilder.ApplyConfiguration(new TypeInsuranceSeeds());
+            #endregion
           
               
         }

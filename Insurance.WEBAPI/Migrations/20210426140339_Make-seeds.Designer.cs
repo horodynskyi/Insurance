@@ -4,14 +4,16 @@ using Insurance.Infrastracture.Infrastracture;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Insurance.WEBAPI.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    partial class InsuranceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210426140339_Make-seeds")]
+    partial class Makeseeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,20 +243,15 @@ namespace Insurance.WEBAPI.Migrations
 
             modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int?>("ContractId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ReasonId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContractId");
+                    b.HasIndex("ContractId")
+                        .IsUnique()
+                        .HasFilter("[ContractId] IS NOT NULL");
 
                     b.HasIndex("ReasonId");
 
@@ -339,8 +336,8 @@ namespace Insurance.WEBAPI.Migrations
             modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
                 {
                     b.HasOne("Insurance.DAL.Models.Contract", "Contract")
-                        .WithMany()
-                        .HasForeignKey("ContractId");
+                        .WithOne()
+                        .HasForeignKey("Insurance.DAL.Models.TerminatedContract", "ContractId");
 
                     b.HasOne("Insurance.DAL.Models.Reason", "Reason")
                         .WithMany()

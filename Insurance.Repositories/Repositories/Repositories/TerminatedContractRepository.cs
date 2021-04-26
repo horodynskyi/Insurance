@@ -19,17 +19,28 @@ namespace Insurance.Repositories.Repositories.Repositories
 
         public async Task Create(TerminatedContract contract)
         {
-            await _context.Set<TerminatedContract>().AddAsync(contract);
+            contract.Contract = await _context.Contracts.FindAsync(contract.Contract.Id);
+            contract.Reason = await _context.Reasons.FindAsync(contract.Reason.Id);
+            await _context.TerminatedContracts.AddAsync(contract);
+            await _context.SaveChangesAsync();
         }
-
         public async Task<IEnumerable<TerminatedContract>> Get()
         {
-            return await _context.Set<TerminatedContract>().ToListAsync();
+            
+            return await _context.TerminatedContracts
+                .Include(t => t.Contract)
+                .Include(t => t.Reason)
+                .ToListAsync();
         }
 
+        
         public async Task<TerminatedContract> GetById(int contractId)
         {
-            return await _context.Set<TerminatedContract>().FindAsync(contractId);
+            
+            return await _context.TerminatedContracts
+                .Include(t => t.Contract)
+                .Include(t => t.Reason)
+                .FirstOrDefaultAsync(c =>c.Id==contractId );;
         }
 
         public async Task Update(TerminatedContract contract, int contractId)

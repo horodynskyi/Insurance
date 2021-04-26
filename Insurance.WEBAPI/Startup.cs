@@ -13,7 +13,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using AutoMapper;
+using FluentValidation;
+using Insurance.DAL.Models;
+using Insurance.DTO.DTO;
+using Insurance.Validation.Validators;
 
 namespace Insurance.WEBAPI
 {
@@ -29,57 +32,81 @@ namespace Insurance.WEBAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             #region InsuranceContext
+
             services.AddDbContext<InsuranceDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("EFConnection"),
                 b => b.MigrationsAssembly("Insurance.WEBAPI")));
+
             #endregion
-            
+
             #region Authentication
+
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication("Bearer", options =>
                 {
                     options.ApiName = "myApi";
                     options.Authority = "https://localhost:44303";
                 });
-            #endregion
-
-            #region Services
-
-            services.AddTransient<IRiskService, RiskService>();
-            services.AddTransient<IContractService, ContractService>();
-            services.AddTransient<IAgentService, AgentService>();
 
             #endregion
+
+           
 
             #region Repositories
 
+             services.AddTransient<IContractRepository, ContractRepository>();
             services.AddTransient<IRiskRepository, RiskRepository>();
             services.AddTransient<IAgentRepository, AgentRepository>();
+            
             services.AddTransient<IBranchRepository, BranchRepository>();
             services.AddTransient<IBranchAgentRepository, BranchAgentRepository>();
             services.AddTransient<ITariffRepository, TariffRepository>();
             services.AddTransient<ITerminatedContractRepository, TerminatedContractRepository>();
-            services.AddTransient<IContractRepository, ContractRepository>();
             services.AddTransient<IReasonRepository, ReasonRepository>();
             services.AddTransient<ITypeInsuranceRepository, TypeInsuranceRepository>();
 
             #endregion
 
-            #region AutoMapper
-            services.AddAutoMapper(typeof(AutoMapping));
-            #endregion
-            
             #region UnitOfWork
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             #endregion
+            #region Services
+
+            services.AddTransient<IContractService, ContractService>();
+            services.AddTransient<IAgentService, AgentService>();
+            services.AddTransient<IBranchService, BranchService>();
+            services.AddTransient<IReasonService, ReasonService>();
+            services.AddTransient<ITerminatedContractService, TerminatedContractService>();
+            services.AddTransient<IRiskService, RiskService>();
+            services.AddTransient<IBranchAgentService, BranchAgentService>();
+            services.AddTransient<ITariffService, TariffService>();
+            services.AddTransient<ITypeInsuranceService, TypeInsuranceService>();
+
+            #endregion
+            #region AutoMapper
+
+            services.AddAutoMapper(typeof(AutoMapping));
+
+            #endregion
+
+          
 
             #region Controllers
 
             services.AddControllers();
 
             #endregion
+
+            /*
+            #region FluentValidation
+
+            services.AddTransient<IValidator<ContractDTO>, ContractValidator>();
+
+            #endregion
+            */
 
             #region Swagger
 
@@ -89,7 +116,6 @@ namespace Insurance.WEBAPI
             });
 
             #endregion
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

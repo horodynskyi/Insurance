@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.Results;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
@@ -12,16 +14,16 @@ namespace Insurance.BLL.Services
     public class ContractService:IContractService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _autoMapper;
-        public ContractService(IUnitOfWork unitOfWork, IMapper autoMapper)
+      //  private readonly IValidator<Contract> _validator;
+        public ContractService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _autoMapper = autoMapper;
+            
         }
 
-        public async Task Create(ContractDTO contractDto)
+        public async Task Create(Contract contract)
         {
-            var contract = _autoMapper.Map<Contract>(contractDto);
+            
             await _unitOfWork.ContractRepository.Create(contract);
         }
 
@@ -44,5 +46,10 @@ namespace Insurance.BLL.Services
         {
             await _unitOfWork.ContractRepository.Delete(id);
         }
+
+        /*public async Task<ValidationResult> ContractValidation(Contract contract)
+        {
+            return await _validator.ValidateAsync(contract);
+        }*/
     }
 }
