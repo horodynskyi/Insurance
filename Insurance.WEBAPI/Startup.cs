@@ -1,3 +1,4 @@
+using Entities.Helpers;
 using Insurance.BLL.Interfaces;
 using Insurance.BLL.Services;
 using Insurance.DTO.Mapper;
@@ -16,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using FluentValidation;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
+using Insurance.Helpers.Helpers.Interfaces;
 using Insurance.Validation.Validators;
 
 namespace Insurance.WEBAPI
@@ -100,13 +102,17 @@ namespace Insurance.WEBAPI
 
             #endregion
 
-            /*
             #region FluentValidation
 
-            services.AddTransient<IValidator<ContractDTO>, ContractValidator>();
+            services.AddTransient<IValidator<Contract>, ContractValidator>();
 
             #endregion
-            */
+
+            #region Helpers
+
+            services.AddTransient<ISortHelper<Contract>, SortHelper<Contract>>();
+
+            #endregion
 
             #region Swagger
 

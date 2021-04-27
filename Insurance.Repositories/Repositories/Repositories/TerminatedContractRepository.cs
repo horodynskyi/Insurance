@@ -26,11 +26,16 @@ namespace Insurance.Repositories.Repositories.Repositories
         }
         public async Task<IEnumerable<TerminatedContract>> Get()
         {
-            
-            return await _context.TerminatedContracts
+            var result = await _context.TerminatedContracts
                 .Include(t => t.Contract)
+                .Include(c=>c.Contract.Agent)
+                .Include(c=>c.Contract.Risk)
+                .Include(c=>c.Contract.Branch)
+                .Include(c=>c.Contract.Tariff)
+                .Include(c=>c.Contract.TypeInsurance)
                 .Include(t => t.Reason)
                 .ToListAsync();
+            return result;
         }
 
         

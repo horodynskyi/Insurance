@@ -7,6 +7,7 @@ using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
 using Insurance.DTO.Mapper;
+using Insurance.Helpers.Params;
 using Insurance.Repositories.UnitOfWork.Interfaces;
 
 namespace Insurance.BLL.Services
@@ -14,11 +15,11 @@ namespace Insurance.BLL.Services
     public class ContractService:IContractService
     {
         private readonly IUnitOfWork _unitOfWork;
-      //  private readonly IValidator<Contract> _validator;
-        public ContractService(IUnitOfWork unitOfWork)
+        private readonly IValidator<Contract> _validator;
+        public ContractService(IUnitOfWork unitOfWork, IValidator<Contract> validator)
         {
             _unitOfWork = unitOfWork;
-            
+            _validator = validator;
         }
 
         public async Task Create(Contract contract)
@@ -27,9 +28,9 @@ namespace Insurance.BLL.Services
             await _unitOfWork.ContractRepository.Create(contract);
         }
 
-        public async Task<IEnumerable<Contract>> Get()
+        public async Task<IEnumerable<Contract>> Get(ContractParams parameters)
         {
-            return await _unitOfWork.ContractRepository.Get();
+            return await _unitOfWork.ContractRepository.Get(parameters);
         }
 
         public async Task<Contract> GetById(int id)
@@ -47,9 +48,9 @@ namespace Insurance.BLL.Services
             await _unitOfWork.ContractRepository.Delete(id);
         }
 
-        /*public async Task<ValidationResult> ContractValidation(Contract contract)
+        public async Task<ValidationResult> ContractValidation(Contract contract)
         {
             return await _validator.ValidateAsync(contract);
-        }*/
+        }
     }
 }

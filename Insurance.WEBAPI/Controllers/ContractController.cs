@@ -4,6 +4,7 @@ using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
+using Insurance.Helpers.Params;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,9 +25,9 @@ namespace Insurance.WEBAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] ContractParams parameters)
         {
-            var result = await _contractService.Get();
+            var result = await _contractService.Get(parameters);
             return Ok(result);
         }
 
@@ -41,6 +42,11 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> Add(ContractDTO contractDto)
         {
             var contract = _mapper.Map<Contract>(contractDto);
+            var validationResult = _contractService.ContractValidation(contract).Result;
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => new { Error = x.ErrorMessage, Code = x.ErrorCode }).ToList());
+            }
             await _contractService.Create(contract);
             return Ok();
         }

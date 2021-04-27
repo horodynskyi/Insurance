@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Insurance.Infrastracture.Infrastracture;
 using Insurance.Repositories.Interfaces;
@@ -41,6 +43,11 @@ namespace Insurance.Repositories.Repositories
             var result = await _context.Set<TEntity>().FindAsync(id);
             _context.Set<TEntity>().Remove(result);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IQueryable<TEntity>> FindByCondition(Expression<Func<TEntity, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
     }
 }

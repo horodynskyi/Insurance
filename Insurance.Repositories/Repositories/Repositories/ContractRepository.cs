@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Insurance.DAL.Models;
+using Insurance.Helpers.Helpers;
+using Insurance.Helpers.Helpers.Interfaces;
+using Insurance.Helpers.Params;
 using Insurance.Infrastracture.Infrastracture;
 using Insurance.Repositories.Interfaces.IRepositories;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +12,11 @@ namespace Insurance.Repositories.Repositories.Repositories
 {
     public class ContractRepository:GenericRepository<Contract,int>,IContractRepository
     {
+        private readonly ISortHelper<Contract> _sortHelper;
       
-        public ContractRepository(InsuranceDbContext context) : base(context)
+        public ContractRepository(InsuranceDbContext context, ISortHelper<Contract> sortHelper) : base(context)
         {
-            
+            _sortHelper = sortHelper;
         }
         
         public new async Task Create(Contract contract)
@@ -27,15 +31,21 @@ namespace Insurance.Repositories.Repositories.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public new async Task<IEnumerable<Contract>> Get()
+        public  async  Task<IEnumerable<Contract>> Get(ContractParams parameters)
         {
-            return await _context.Contracts
+            var result =   _context.Contracts
                 .Include(p =>p.Agent)
                 .Include(p =>p.Branch)
                 .Include(p =>p.Risk)
                 .Include(p =>p.Tariff)
                 .Include(p =>p.TypeInsurance)
-                .ToListAsync();
+                .AsNoTracking();
+            
+            var sortedAccounts = _sortHelper.ApplySort(result, parameters.OrderBy);
+            
+            return  PagedList<Contract>.ToPagedList(sortedAccounts,
+                parameters.PageNumber,
+                parameters.PageSize);
         }
 
         public new async  Task<Contract> GetById(int id)
