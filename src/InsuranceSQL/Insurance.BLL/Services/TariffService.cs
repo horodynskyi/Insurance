@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
+using Insurance.Helpers.Params;
 using Insurance.Repositories.UnitOfWork;
 using Insurance.Repositories.UnitOfWork.Interfaces;
 
@@ -21,9 +22,9 @@ namespace Insurance.BLL.Services
             await _unitOfWork.TariffRepository.Create(tariff);
         }
 
-        public async Task<IEnumerable<Tariff>> Get()
+        public async Task<IEnumerable<Tariff>> Get(GenericParams parameters)
         {
-            return await _unitOfWork.TariffRepository.Get();
+            return await _unitOfWork.TariffRepository.Get(parameters);
         }
 
         public async Task<Tariff> GetById(int id)

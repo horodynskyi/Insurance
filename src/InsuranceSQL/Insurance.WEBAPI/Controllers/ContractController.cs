@@ -37,7 +37,8 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _contractService.GetById(id);
-            return Ok(result);
+            var contract = _mapper.Map<ContractDTO>(result);
+            return Ok(contract);
         }
 
         [HttpPost]

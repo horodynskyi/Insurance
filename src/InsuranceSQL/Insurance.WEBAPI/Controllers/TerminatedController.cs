@@ -24,9 +24,11 @@ namespace Insurance.WEBAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<TerminatedContract>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _terminated.Get();
+            var result = await _terminated.Get();
+            var termContracts = _mapper.Map<IEnumerable<TerminatedContractDTO>>(result);
+            return Ok(termContracts);
         }
 
 
@@ -34,7 +36,8 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _terminated.GetById(id);
-            return Ok(result);
+            var termContract = _mapper.Map<TerminatedContractDTO>(result);
+            return Ok(termContract);
         }
 
         [HttpPost]
@@ -46,8 +49,9 @@ namespace Insurance.WEBAPI.Controllers
         
         
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(TerminatedContract terminatedContract, int id)
+        public async Task<IActionResult> Update(TerminatedContractDTO terminatedContractDto, int id)
         {
+            var terminatedContract = _mapper.Map<TerminatedContract>(terminatedContractDto);
             await _terminated.Update(terminatedContract, id);
             return Ok(terminatedContract);
         }

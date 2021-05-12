@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Insurance.Helpers.Helpers;
+using Insurance.Helpers.Params;
 using Insurance.Infrastracture.Infrastracture;
 using Insurance.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +24,13 @@ namespace Insurance.Repositories.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> Get()
+        public async Task<IEnumerable<TEntity>> Get(GenericParams parameters)
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            var result =  _context.Set<TEntity>().AsQueryable();
+            //return 
+            return  PagedList<TEntity>.ToPagedList(result,
+                parameters.PageNumber,
+                parameters.PageSize);
         }
 
         public async Task<TEntity> GetById(TId id)

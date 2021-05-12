@@ -53,6 +53,15 @@ namespace Insurance.DTO.Mapper
                         {
                             Id = source.ReasonId
                         }));
+            
+            CreateMap<TerminatedContract, TerminatedContractDTO>()
+                .ForMember(dest => dest.ContractId,
+                    map =>
+                        map.MapFrom(source =>source.Contract.Id))
+                .ForMember(dest => dest.ReasonId,
+                    map =>
+                        map.MapFrom(source => source.Reason.Id));
+            
             CreateMap<Contract, ContractDTO>()
                 .ForMember(e => e.AgentId,
                     map => map.MapFrom(src => src.Agent.Id))

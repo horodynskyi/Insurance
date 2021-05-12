@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
+using Insurance.DTO.DTO;
+using Insurance.Helpers.Params;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insurance.WEBAPI.Controllers
@@ -12,22 +15,27 @@ namespace Insurance.WEBAPI.Controllers
     public class ReasonController : Controller
     {
         private readonly IReasonService _reasonService;
+        private readonly IMapper _mapper;
 
-        public ReasonController(IReasonService reasonService)
+        public ReasonController(IReasonService reasonService, IMapper mapper)
         {
             _reasonService = reasonService;
+            _mapper = mapper;
         }
 
         // GET
         [HttpGet]
-        public async Task<IEnumerable<Reason>> Get()
+        public async Task<IActionResult> Get([FromQuery] GenericParams parameters)
         {
-            return await _reasonService.Get();
+            var result = await _reasonService.Get(parameters);
+            var reasons = _mapper.Map<IEnumerable<ReasonDTO>>(result);
+            return Ok(reasons);
         }
 
         [HttpPost]
-        public async Task Add(Reason reason)
+        public async Task Add(ReasonDTO reasonDto)
         {
+            var reason = _mapper.Map<Reason>(reasonDto);
             await _reasonService.Create(reason);
         }
 
@@ -35,14 +43,16 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _reasonService.GetById(id);
-            return Ok(result);
+            var reasons = _mapper.Map<ReasonDTO>(result);
+            return Ok(reasons);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(Reason reason, int id)
+        public async Task<IActionResult> Update(ReasonDTO reasonDto, int id)
         {
+            var reason = _mapper.Map<Reason>(reasonDto);
             await _reasonService.Update(reason, id);
-            return Ok(reason);
+            return Ok();
         }
 
         [HttpDelete("{id:int}")]

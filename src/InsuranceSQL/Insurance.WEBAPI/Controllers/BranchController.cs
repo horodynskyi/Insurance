@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
+using Insurance.DTO.DTO;
+using Insurance.Helpers.Params;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insurance.WEBAPI.Controllers
@@ -12,22 +15,27 @@ namespace Insurance.WEBAPI.Controllers
     public class BranchController : Controller
     {
         private readonly IBranchService _branchService;
+        private readonly IMapper _mapper;
 
-        public BranchController(IBranchService branchService)
+        public BranchController(IBranchService branchService, IMapper mapper)
         {
             _branchService = branchService;
+            _mapper = mapper;
         }
 
         // GET
         [HttpGet]
-        public async Task<IEnumerable<Branch>> Get()
+        public async Task<IActionResult> Get([FromQuery] GenericParams parameters)
         {
-            return await _branchService.Get();
+            var result = await _branchService.Get(parameters);
+            var branches = _mapper.Map<IEnumerable<BranchDTO>>(result);
+            return Ok(branches);
         }
 
         [HttpPost]
-        public async Task Add(Branch branch)
+        public async Task Add(BranchDTO branchDto)
         {
+            var branch = _mapper.Map<Branch>(branchDto);
             await _branchService.Create(branch);
         }
 
@@ -35,12 +43,14 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _branchService.GetById(id);
+            var branch = _mapper.Map<BranchDTO>(result);
             return Ok(result);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(Branch branch, int id)
+        public async Task<IActionResult> Update(BranchDTO branchDto, int id)
         {
+            var branch = _mapper.Map<Branch>(branchDto);
             await _branchService.Update(branch, id);
             return Ok(branch);
         }
