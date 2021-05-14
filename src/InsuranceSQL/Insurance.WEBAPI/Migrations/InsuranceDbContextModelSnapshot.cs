@@ -26,6 +26,9 @@ namespace Insurance.WEBAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -41,6 +44,8 @@ namespace Insurance.WEBAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
 
                     b.ToTable("Agents");
 
@@ -60,6 +65,76 @@ namespace Insurance.WEBAPI.Migrations
                             Patronumic = "Ihorovich",
                             Salary = 0.0,
                             SecondName = "Pronin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Єремій",
+                            Salary = 0.0,
+                            SecondName = "Громико"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Далемир",
+                            Salary = 0.0,
+                            SecondName = "Трясун"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Добромисла",
+                            Salary = 0.0,
+                            SecondName = "Тиндарей"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            FirstName = "Ганна",
+                            Salary = 0.0,
+                            SecondName = "Коман"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            FirstName = "Лідія",
+                            Salary = 0.0,
+                            SecondName = "Ярмак"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            FirstName = "Ян",
+                            Salary = 0.0,
+                            SecondName = "Гаман"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FirstName = "Любозар",
+                            Salary = 0.0,
+                            SecondName = "Левадовська"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FirstName = "Гнат",
+                            Salary = 0.0,
+                            SecondName = "Пагутяк"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FirstName = "Соломія",
+                            Salary = 0.0,
+                            SecondName = "Слободян"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FirstName = "Ярина",
+                            Salary = 0.0,
+                            SecondName = "Лазірко"
                         });
                 });
 
@@ -100,19 +175,24 @@ namespace Insurance.WEBAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Insurance.DAL.Models.BranchAgent", b =>
+            modelBuilder.Entity("Insurance.DAL.Models.ClientContract", b =>
                 {
-                    b.Property<int?>("AgentId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BranchId")
+                    b.Property<int?>("ContractId")
                         .HasColumnType("int");
 
-                    b.HasIndex("AgentId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BranchId");
+                    b.HasIndex("ContractId");
 
-                    b.ToTable("BranchAgents");
+                    b.ToTable("ClientContracts");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Contract", b =>
@@ -125,17 +205,14 @@ namespace Insurance.WEBAPI.Migrations
                     b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BranchId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("RiskId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("TariffId")
                         .HasColumnType("int");
@@ -147,9 +224,9 @@ namespace Insurance.WEBAPI.Migrations
 
                     b.HasIndex("AgentId");
 
-                    b.HasIndex("BranchId");
-
                     b.HasIndex("RiskId");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("TariffId");
 
@@ -217,6 +294,23 @@ namespace Insurance.WEBAPI.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Insurance.DAL.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ReasonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReasonId");
+
+                    b.ToTable("Statuses");
+                });
+
             modelBuilder.Entity("Insurance.DAL.Models.Tariff", b =>
                 {
                     b.Property<int>("Id")
@@ -244,34 +338,15 @@ namespace Insurance.WEBAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ContractId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReasonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContractId");
-
-                    b.HasIndex("ReasonId");
-
-                    b.ToTable("TerminatedContracts");
-                });
-
             modelBuilder.Entity("Insurance.DAL.Models.TypeInsurance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Interest")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -284,28 +359,33 @@ namespace Insurance.WEBAPI.Migrations
                         new
                         {
                             Id = 1,
+                            Interest = 0.29999999999999999,
                             Name = "House"
                         },
                         new
                         {
                             Id = 2,
+                            Interest = 0.10000000000000001,
                             Name = "Life"
                         });
                 });
 
-            modelBuilder.Entity("Insurance.DAL.Models.BranchAgent", b =>
+            modelBuilder.Entity("Insurance.DAL.Models.Agent", b =>
                 {
-                    b.HasOne("Insurance.DAL.Models.Agent", "Agent")
-                        .WithMany()
-                        .HasForeignKey("AgentId");
-
                     b.HasOne("Insurance.DAL.Models.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId");
 
-                    b.Navigation("Agent");
-
                     b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("Insurance.DAL.Models.ClientContract", b =>
+                {
+                    b.HasOne("Insurance.DAL.Models.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId");
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Contract", b =>
@@ -314,13 +394,13 @@ namespace Insurance.WEBAPI.Migrations
                         .WithMany()
                         .HasForeignKey("AgentId");
 
-                    b.HasOne("Insurance.DAL.Models.Branch", "Branch")
-                        .WithMany()
-                        .HasForeignKey("BranchId");
-
                     b.HasOne("Insurance.DAL.Models.Risk", "Risk")
                         .WithMany()
                         .HasForeignKey("RiskId");
+
+                    b.HasOne("Insurance.DAL.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
 
                     b.HasOne("Insurance.DAL.Models.Tariff", "Tariff")
                         .WithMany()
@@ -332,26 +412,20 @@ namespace Insurance.WEBAPI.Migrations
 
                     b.Navigation("Agent");
 
-                    b.Navigation("Branch");
-
                     b.Navigation("Risk");
+
+                    b.Navigation("Status");
 
                     b.Navigation("Tariff");
 
                     b.Navigation("TypeInsurance");
                 });
 
-            modelBuilder.Entity("Insurance.DAL.Models.TerminatedContract", b =>
+            modelBuilder.Entity("Insurance.DAL.Models.Status", b =>
                 {
-                    b.HasOne("Insurance.DAL.Models.Contract", "Contract")
-                        .WithMany()
-                        .HasForeignKey("ContractId");
-
                     b.HasOne("Insurance.DAL.Models.Reason", "Reason")
                         .WithMany()
                         .HasForeignKey("ReasonId");
-
-                    b.Navigation("Contract");
 
                     b.Navigation("Reason");
                 });

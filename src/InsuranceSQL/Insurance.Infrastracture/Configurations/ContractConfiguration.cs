@@ -12,8 +12,8 @@ namespace Insurance.Infrastracture.Configurations
             builder.HasOne(x => x.Risk).WithMany();
             builder.HasOne(x => x.Tariff).WithMany();
             builder.HasOne(x => x.TypeInsurance).WithMany();
-            builder.HasOne(x => x.Branch).WithMany();
             builder.HasOne(x => x.Agent).WithMany();
+            builder.HasOne(x => x.Status).WithMany();
         }
     }
 }

@@ -8,5 +8,6 @@ namespace Insurance.Repositories.Interfaces.IRepositories
     public interface IContractRepository:IGenericRepository<Contract,int>
     {
         Task<IEnumerable<Contract>> Get(ContractParams parameters);
+        Task GetCountContracts(AgentParams agentParams);
     }
 }

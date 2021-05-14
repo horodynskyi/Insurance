@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Insurance.BLL.Interfaces;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
 using Insurance.Helpers.Params;
+using Insurance.Infrastracture.Infrastracture;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insurance.WEBAPI.Controllers
@@ -16,16 +18,18 @@ namespace Insurance.WEBAPI.Controllers
     {
         private readonly IAgentService _agentService;
         private readonly IMapper _mapper;
+        private InsuranceDbContext _context;
 
-        public AgentController(IAgentService agentService, IMapper mapper)
+        public AgentController(IAgentService agentService, IMapper mapper, InsuranceDbContext context)
         {
             _agentService = agentService;
             _mapper = mapper;
+            _context = context;
         }
 
         // GET
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GenericParams parameters)
+        public async Task<IActionResult> Get([FromQuery] AgentParams parameters)
         {
             var result = await _agentService.Get(parameters);
             var agents = _mapper.Map<IEnumerable<AgentDTO>>(result);
@@ -60,6 +64,29 @@ namespace Insurance.WEBAPI.Controllers
         {
             await _agentService.Delete(id);
             return  Ok();
+        }
+
+        [HttpGet("/test/")]
+        public IActionResult Test([FromQuery]int Id , [FromQuery]int typeInsuranceId)
+        {
+            var result = _context.Agents
+                .Where(ag => ag.Id == Id)
+                .Join(
+                    _context.Contracts,
+                    c => c.Id,
+                    ag => ag.Agent.Id,
+                    (c, ag) =>
+                        new
+                        {
+                            Name = c.FirstName,
+                            TypeInsuranceId = ag.TypeInsurance.Id
+                        }
+                )
+                .Where(ti => ti.TypeInsuranceId == typeInsuranceId)
+                .AsQueryable();
+              //  .Count(ti =>);
+                
+            return Ok(result);
         }
     }
 }

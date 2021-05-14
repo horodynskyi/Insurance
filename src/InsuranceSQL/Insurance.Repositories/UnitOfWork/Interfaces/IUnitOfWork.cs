@@ -9,8 +9,7 @@ namespace Insurance.Repositories.UnitOfWork.Interfaces
         IBranchRepository BranchRepository { get; }
         IReasonRepository ReasonRepository { get; }
         ITariffRepository TariffRepository { get; }
-        IBranchAgentRepository BranchAgentRepository { get; }
-        ITerminatedContractRepository TerminatedContractRepository { get; }
+      
         ITypeInsuranceRepository TypeInsuranceRepository { get; }
         IAgentRepository AgentRepository { get; }
     }

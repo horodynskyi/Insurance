@@ -12,12 +12,14 @@ namespace Insurance.Infrastracture.Seeds
                 new TypeInsurance
                 {
                     Id = 1,
-                    Name = "House"
+                    Name = "House",
+                    Interest = 0.3
                 },
                 new TypeInsurance
                 {
                     Id = 2,
-                    Name = "Life"
+                    Name = "Life",
+                    Interest = 0.1
                 });
         }
     }

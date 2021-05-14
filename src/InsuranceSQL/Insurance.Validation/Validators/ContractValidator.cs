@@ -18,8 +18,6 @@ namespace Insurance.Validation.Validators
                 .MustAsync(IsExist).WithMessage("The entered agent  doesn`t exist");
             RuleFor(x => x.Risk).NotNull().WithMessage("Agent must be not null!")
                 .MustAsync(IsExist).WithMessage("The entered risks  doesn`t exist");
-            RuleFor(x => x.Branch).NotNull().WithMessage("Branch must be not null!")
-                .MustAsync(IsExist).WithMessage("The entered branch  doesn`t exist");
             RuleFor(x => x.Tariff).NotNull().WithMessage("Agent must be not null!")
                 .MustAsync(IsExist).WithMessage("The entered tariff  doesn`t exist");
             RuleFor(x => x.TypeInsurance).NotNull().WithMessage("Agent must be not null!")
