@@ -8,22 +8,6 @@ namespace Insurance.WEBAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Agents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Patronumic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salary = table.Column<double>(type: "float", nullable: false, computedColumnSql: "([dbo].[computeSalary]([Id]))", stored: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agents", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Branches",
                 columns: table => new
                 {
@@ -84,7 +68,8 @@ namespace Insurance.WEBAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Interest = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,24 +77,43 @@ namespace Insurance.WEBAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BranchAgents",
+                name: "Agents",
                 columns: table => new
                 {
-                    AgentId = table.Column<int>(type: "int", nullable: true),
-                    BranchId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Patronumic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BranchId = table.Column<int>(type: "int", nullable: true),
+                    Salary = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Agents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BranchAgents_Agents_AgentId",
-                        column: x => x.AgentId,
-                        principalTable: "Agents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BranchAgents_Branches_BranchId",
+                        name: "FK_Agents_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Statuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReasonId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Statuses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Statuses_Reasons_ReasonId",
+                        column: x => x.ReasonId,
+                        principalTable: "Reasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -124,9 +128,8 @@ namespace Insurance.WEBAPI.Migrations
                     RiskId = table.Column<int>(type: "int", nullable: true),
                     TariffId = table.Column<int>(type: "int", nullable: true),
                     TypeInsuranceId = table.Column<int>(type: "int", nullable: true),
-                    BranchId = table.Column<int>(type: "int", nullable: true),
                     AgentId = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    StatusId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,15 +141,15 @@ namespace Insurance.WEBAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Contracts_Branches_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "Branches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Contracts_Risks_RiskId",
                         column: x => x.RiskId,
                         principalTable: "Risks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Contracts_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -164,38 +167,42 @@ namespace Insurance.WEBAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TerminatedContracts",
+                name: "ClientContracts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContractId = table.Column<int>(type: "int", nullable: true),
-                    ReasonId = table.Column<int>(type: "int", nullable: true)
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    ContractId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TerminatedContracts", x => x.Id);
+                    table.PrimaryKey("PK_ClientContracts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TerminatedContracts_Contracts_ContractId",
+                        name: "FK_ClientContracts_Contracts_ContractId",
                         column: x => x.ContractId,
                         principalTable: "Contracts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TerminatedContracts_Reasons_ReasonId",
-                        column: x => x.ReasonId,
-                        principalTable: "Reasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Agents",
-                columns: new[] { "Id", "FirstName", "Patronumic", "SecondName" },
+                columns: new[] { "Id", "BranchId", "FirstName", "Patronumic", "Salary", "SecondName" },
                 values: new object[,]
                 {
-                    { 1, "Maksym", "Victorovich", "Horodynksyi" },
-                    { 2, "Eugen", "Ihorovich", "Pronin" }
+                    { 1, null, "Maksym", "Victorovich", 0.0, "Horodynksyi" },
+                    { 12, null, "Листвич", null, 0.0, "Москаль" },
+                    { 10, null, "Немир", null, 0.0, "Дмитрук" },
+                    { 9, null, "Боримир", null, 0.0, "Мазун" },
+                    { 8, null, "Назарій", null, 0.0, "Балицька" },
+                    { 7, null, "Антонія", null, 0.0, "Цушко" },
+                    { 11, null, "Устим", null, 0.0, "Латаний" },
+                    { 5, null, "Антон", null, 0.0, "Москалюк" },
+                    { 4, null, "Зорина", null, 0.0, "Степанець" },
+                    { 3, null, "Любодар", null, 0.0, "Негода" },
+                    { 2, null, "Eugen", "Ihorovich", 0.0, "Pronin" },
+                    { 6, null, "Натан", null, 0.0, "Трублаєвська" }
                 });
 
             migrationBuilder.InsertData(
@@ -236,22 +243,22 @@ namespace Insurance.WEBAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "TypeInsurances",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Interest", "Name" },
                 values: new object[,]
                 {
-                    { 1, "House" },
-                    { 2, "Life" }
+                    { 1, 0.29999999999999999, "House" },
+                    { 2, 0.10000000000000001, "Life" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BranchAgents_AgentId",
-                table: "BranchAgents",
-                column: "AgentId");
+                name: "IX_Agents_BranchId",
+                table: "Agents",
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BranchAgents_BranchId",
-                table: "BranchAgents",
-                column: "BranchId");
+                name: "IX_ClientContracts_ContractId",
+                table: "ClientContracts",
+                column: "ContractId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contracts_AgentId",
@@ -259,14 +266,14 @@ namespace Insurance.WEBAPI.Migrations
                 column: "AgentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contracts_BranchId",
-                table: "Contracts",
-                column: "BranchId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Contracts_RiskId",
                 table: "Contracts",
                 column: "RiskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contracts_StatusId",
+                table: "Contracts",
+                column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contracts_TariffId",
@@ -279,44 +286,39 @@ namespace Insurance.WEBAPI.Migrations
                 column: "TypeInsuranceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TerminatedContracts_ContractId",
-                table: "TerminatedContracts",
-                column: "ContractId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TerminatedContracts_ReasonId",
-                table: "TerminatedContracts",
+                name: "IX_Statuses_ReasonId",
+                table: "Statuses",
                 column: "ReasonId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BranchAgents");
-
-            migrationBuilder.DropTable(
-                name: "TerminatedContracts");
+                name: "ClientContracts");
 
             migrationBuilder.DropTable(
                 name: "Contracts");
 
             migrationBuilder.DropTable(
-                name: "Reasons");
-
-            migrationBuilder.DropTable(
                 name: "Agents");
 
             migrationBuilder.DropTable(
-                name: "Branches");
+                name: "Risks");
 
             migrationBuilder.DropTable(
-                name: "Risks");
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "Tariffs");
 
             migrationBuilder.DropTable(
                 name: "TypeInsurances");
+
+            migrationBuilder.DropTable(
+                name: "Branches");
+
+            migrationBuilder.DropTable(
+                name: "Reasons");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Insurance.DTO.DTO
         public int RiskId { get; set; }
         public int TariffId { get; set; }
         public int TypeInsuranceId { get; set; }
-        public int BranchId { get; set; }
+        public int StatusId { get; set; }
         public int AgentId { get; set; }
     }
 }

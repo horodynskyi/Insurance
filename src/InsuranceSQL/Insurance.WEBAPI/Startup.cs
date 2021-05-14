@@ -60,9 +60,7 @@ namespace Insurance.WEBAPI
             services.AddTransient<IAgentRepository, AgentRepository>();
             
             services.AddTransient<IBranchRepository, BranchRepository>();
-            services.AddTransient<IBranchAgentRepository, BranchAgentRepository>();
             services.AddTransient<ITariffRepository, TariffRepository>();
-            services.AddTransient<ITerminatedContractRepository, TerminatedContractRepository>();
             services.AddTransient<IReasonRepository, ReasonRepository>();
             services.AddTransient<ITypeInsuranceRepository, TypeInsuranceRepository>();
 
@@ -80,9 +78,7 @@ namespace Insurance.WEBAPI
             services.AddTransient<IAgentService, AgentService>();
             services.AddTransient<IBranchService, BranchService>();
             services.AddTransient<IReasonService, ReasonService>();
-            services.AddTransient<ITerminatedContractService, TerminatedContractService>();
             services.AddTransient<IRiskService, RiskService>();
-            services.AddTransient<IBranchAgentService, BranchAgentService>();
             services.AddTransient<ITariffService, TariffService>();
             services.AddTransient<ITypeInsuranceService, TypeInsuranceService>();
 

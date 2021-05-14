@@ -10,8 +10,7 @@ namespace Insurance.DAL.Models
         public Risk Risk { get; set; }
         public Tariff Tariff { get; set; }
         public TypeInsurance TypeInsurance { get; set; }
-        public Branch Branch { get; set; }
         public Agent Agent { get; set; }
-        public bool Status { get; set; }
+        public Status Status { get; set; }
     }
 }

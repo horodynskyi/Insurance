@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Insurance.Infrastracture.Configurations
 {
-    public class TerminatedContractConfiguration:IEntityTypeConfiguration<TerminatedContract>
+    public class StatusConfiguration:IEntityTypeConfiguration<Status>
     {
-        public void Configure(EntityTypeBuilder<TerminatedContract> builder)
+        public void Configure(EntityTypeBuilder<Status> builder)
         {
-            builder.HasKey(t =>t.Id);
-            builder.HasOne(x => x.Contract).WithMany();
+            builder.HasKey(s =>s.Id);
             builder.HasOne(x => x.Reason).WithMany();
         }
     }

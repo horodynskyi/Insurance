@@ -15,12 +15,6 @@ namespace Insurance.DTO.Mapper
                         {
                             Id = source.AgentId
                         }))
-                .ForMember(dest => dest.Branch,
-                    map => map.MapFrom(
-                        source => new Branch
-                        {
-                            Id = source.BranchId
-                        }))
                 .ForMember(dest => dest.Risk,
                     map => map.MapFrom(
                         source => new Risk
@@ -38,7 +32,14 @@ namespace Insurance.DTO.Mapper
                         source => new TypeInsurance
                         {
                             Id = source.TypeInsuranceId
-                        }));
+                        }))
+                .ForMember(dest => dest.Status,
+                    map => map.MapFrom(
+                        source => new Status
+                        {
+                            Id = source.StatusId
+                        }));;
+                        
             ;
             CreateMap<TerminatedContractDTO, TerminatedContract>()
                 .ForMember(dest => dest.Contract,
@@ -65,14 +66,15 @@ namespace Insurance.DTO.Mapper
             CreateMap<Contract, ContractDTO>()
                 .ForMember(e => e.AgentId,
                     map => map.MapFrom(src => src.Agent.Id))
-                .ForMember(e => e.BranchId,
-                    map => map.MapFrom(src => src.Branch.Id))
                 .ForMember(e => e.RiskId,
                     map => map.MapFrom(src => src.Risk.Id))
                 .ForMember(e => e.TariffId,
                     map => map.MapFrom(src => src.Tariff.Id))
                 .ForMember(e => e.AgentId,
-                    map => map.MapFrom(src => src.TypeInsurance.Id));
+                    map => map.MapFrom(src => src.TypeInsurance.Id))
+                .ForMember(e => e.StatusId,
+                    map => map.MapFrom(src => src.Status.Id));;
+            
 
             CreateMap<AgentDTO, Agent>();
             CreateMap<Agent, AgentDTO>();
