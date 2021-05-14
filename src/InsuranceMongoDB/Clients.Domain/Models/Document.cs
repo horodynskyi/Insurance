@@ -1,9 +1,9 @@
 ﻿namespace Clients.Domain.Models
 {
-    public class Documents
+    public class Document
     {
         public int Id { get; set; }
         public string Itn { get; set; }
-        public byte[] Image { get; set; }
+        //public byte[] Image { get; set; }
     }
 }
