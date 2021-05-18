@@ -7,13 +7,10 @@ using Insurance.Infrastracture.Infrastracture;
 
 namespace Insurance.Validation.Validators
 {
-    public class ContractValidator : AbstractValidator<Contract>
+    public class ContractValidator : GenericValidator<Contract>
     {
-       private readonly InsuranceDbContext _context;
-
-        public ContractValidator(InsuranceDbContext context)
+        public ContractValidator(InsuranceDbContext context) : base(context)
         {
-            _context = context;
             RuleFor(x => x.Agent).NotNull().WithMessage("Agent must be not null!")
                 .MustAsync(IsExist).WithMessage("The entered agent  doesn`t exist");
             RuleFor(x => x.Risk).NotNull().WithMessage("Agent must be not null!")
@@ -22,12 +19,7 @@ namespace Insurance.Validation.Validators
                 .MustAsync(IsExist).WithMessage("The entered tariff  doesn`t exist");
             RuleFor(x => x.TypeInsurance).NotNull().WithMessage("Agent must be not null!")
                 .MustAsync(IsExist).WithMessage("The entered tariff  doesn`t exist");
-        }
-
-        public async Task<bool> IsExist<TEntity>(TEntity entity,CancellationToken token) where TEntity:class
-        {
-            
-            return await IsExistChecker.IsExist(_context, entity, token);
+            RuleFor(x => x.DateTime).NotNull();
         }
     }
 }

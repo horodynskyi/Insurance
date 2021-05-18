@@ -29,6 +29,37 @@
         "GET",
         "DELETE"
       ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/agent/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9090
+        }
+      ],
+      "UpstreamPathTemplate": "/Insurance/agent/",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/agent/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9090
+        }
+      ],
+      "UpstreamPathTemplate": "/Insurance/agent/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE",
+        "GET",
+        "PUT"
+      ]
     }
   ],
   "GlobalConfiguration": {

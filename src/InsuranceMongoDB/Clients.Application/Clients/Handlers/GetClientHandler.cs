@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using Clients.Application.Interfaces;
 using Clients.Application.Queries;
 using Clients.Application.Queries.Clients;
-using Clients.Domain.Models;
+using Clients.Persistance;
 using MediatR;
+using Client = Clients.Domain.Models.Client;
 
 namespace Clients.Application.Handlers
 {

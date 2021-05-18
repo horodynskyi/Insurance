@@ -11,28 +11,14 @@ namespace Insurance.Infrastracture.Seeds
         
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
-            builder.HasData(
-                new Agent
-                {
-                    Id = 1,
-                    FirstName = "Maksym",
-                    SecondName = "Horodynksyi",
-                    Patronumic = "Victorovich",
-                },
-                new Agent
-                {
-                    Id = 2,
-                    FirstName = "Eugen",
-                    SecondName = "Pronin",
-                    Patronumic = "Ihorovich",
-                });
-            var ids = 3;
+           
+            /*var ids = 3;
             var stockAgents = new Faker<Agent>("uk")
                 .RuleFor(ag => ag.Id, f => ids++)
                 .RuleFor(ag => ag.FirstName, f=>f.Name.FirstName())
                 .RuleFor(ag => ag.SecondName,f=>f.Name.LastName());
             builder
-                .HasData(stockAgents.GenerateBetween(10, 10));
+                .HasData(stockAgents.GenerateBetween(10, 10));*/
         }
     }
 }

@@ -38,10 +38,11 @@ namespace Insurance.Infrastracture.Infrastracture
             modelBuilder.ApplyConfiguration(new RiskConfiguration());
             modelBuilder.ApplyConfiguration(new ClientContractConfiguration());
             #endregion
-
+            
             #region Seeds
-            modelBuilder.ApplyConfiguration(new AgentSeeds());
             modelBuilder.ApplyConfiguration(new BranchSeeds());
+            modelBuilder.ApplyConfiguration(new AgentSeeds());
+          
             modelBuilder.ApplyConfiguration(new ReasonSeeds());
             modelBuilder.ApplyConfiguration(new RiskSeeds());
             modelBuilder.ApplyConfiguration(new TariffSeeds());
@@ -50,6 +51,10 @@ namespace Insurance.Infrastracture.Infrastracture
           
          
               
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

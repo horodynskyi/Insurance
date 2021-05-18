@@ -27,7 +27,7 @@ namespace Insurance.Repositories.Repositories.Repositories
             contract.Risk = await _context.Risks.FindAsync(contract.Risk.Id);
             contract.Tariff = await _context.Tariffs.FindAsync(contract.Tariff.Id);
             contract.TypeInsurance = await _context.TypeInsurances.FindAsync(contract.TypeInsurance.Id);
-
+            contract.Status = await _context.Statuses.FindAsync(contract.Status.Id);
             await _context.Contracts.AddAsync(contract);
             await _context.SaveChangesAsync();
         }

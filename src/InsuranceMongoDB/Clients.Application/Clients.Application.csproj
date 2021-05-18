@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Clients.Domain\Clients.Domain.csproj" />
+      <ProjectReference Include="..\Clients.Persistance\Clients.Persistance.csproj" />
     </ItemGroup>
 
     <ItemGroup>

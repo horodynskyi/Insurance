@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Insurance.WEBAPI.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    [Migration("20210514112618_ComputeSalary")]
-    partial class ComputeSalary
+    [Migration("20210517105907_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,9 +34,6 @@ namespace Insurance.WEBAPI.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Patronumic")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Salary")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("float")
@@ -50,94 +47,6 @@ namespace Insurance.WEBAPI.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Agents");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Maksym",
-                            Patronumic = "Victorovich",
-                            Salary = 0.0,
-                            SecondName = "Horodynksyi"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Eugen",
-                            Patronumic = "Ihorovich",
-                            Salary = 0.0,
-                            SecondName = "Pronin"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Єремій",
-                            Salary = 0.0,
-                            SecondName = "Громико"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Далемир",
-                            Salary = 0.0,
-                            SecondName = "Трясун"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FirstName = "Добромисла",
-                            Salary = 0.0,
-                            SecondName = "Тиндарей"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FirstName = "Ганна",
-                            Salary = 0.0,
-                            SecondName = "Коман"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            FirstName = "Лідія",
-                            Salary = 0.0,
-                            SecondName = "Ярмак"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            FirstName = "Ян",
-                            Salary = 0.0,
-                            SecondName = "Гаман"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            FirstName = "Любозар",
-                            Salary = 0.0,
-                            SecondName = "Левадовська"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            FirstName = "Гнат",
-                            Salary = 0.0,
-                            SecondName = "Пагутяк"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            FirstName = "Соломія",
-                            Salary = 0.0,
-                            SecondName = "Слободян"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            FirstName = "Ярина",
-                            Salary = 0.0,
-                            SecondName = "Лазірко"
-                        });
                 });
 
             modelBuilder.Entity("Insurance.DAL.Models.Branch", b =>

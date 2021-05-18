@@ -38,7 +38,8 @@ namespace Insurance.DTO.Mapper
                         source => new Status
                         {
                             Id = source.StatusId
-                        }));;
+                        }));
+            
                         
             ;
             CreateMap<TerminatedContractDTO, TerminatedContract>()
@@ -54,6 +55,8 @@ namespace Insurance.DTO.Mapper
                         {
                             Id = source.ReasonId
                         }));
+            
+         
             
             CreateMap<TerminatedContract, TerminatedContractDTO>()
                 .ForMember(dest => dest.ContractId,
@@ -74,10 +77,29 @@ namespace Insurance.DTO.Mapper
                     map => map.MapFrom(src => src.TypeInsurance.Id))
                 .ForMember(e => e.StatusId,
                     map => map.MapFrom(src => src.Status.Id));;
-            
 
-            CreateMap<AgentDTO, Agent>();
-            CreateMap<Agent, AgentDTO>();
+
+            CreateMap<StatusDTO, Status>()
+                .ForMember(dest => dest.Reason,
+                    map =>map.MapFrom(source => new Reason()
+                    {
+                        Id = source.ReasonId
+                    }));
+
+            CreateMap<Status, StatusDTO>()
+                .ForMember(e => e.ReasonId,
+                    map => map.MapFrom(src => src.Reason.Id));
+            
+            
+            CreateMap<AgentDTO, Agent>()
+                .ForMember(dest=>dest.Branch,
+                map=>map.MapFrom(s => new Branch()
+                {
+                    Id = s.BranchId
+                }));
+            CreateMap<Agent, AgentDTO>()
+                .ForMember(dest =>dest.BranchId,
+                    map => map.MapFrom(s =>s.Branch.Id));
             
             CreateMap<BranchDTO, Branch>();
             CreateMap<Branch, BranchDTO>();

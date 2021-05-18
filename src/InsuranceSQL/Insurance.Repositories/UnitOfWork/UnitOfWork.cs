@@ -5,19 +5,20 @@ namespace Insurance.Repositories.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UnitOfWork(IRiskRepository riskRepository, IContractRepository contractRepository, IBranchRepository branchRepository, IReasonRepository reasonRepository, ITariffRepository tariffRepository,  ITypeInsuranceRepository typeInsuranceRepository, IAgentRepository agentRepository)
+        public UnitOfWork(IRiskRepository riskRepository, IContractRepository contractRepository, IBranchRepository branchRepository, IReasonRepository reasonRepository, ITariffRepository tariffRepository,  ITypeInsuranceRepository typeInsuranceRepository, IAgentRepository agentRepository, IStatusRepository statusRepository)
         {
             RiskRepository = riskRepository;
             ContractRepository = contractRepository;
             BranchRepository = branchRepository;
             ReasonRepository = reasonRepository;
             TariffRepository = tariffRepository;
-         
             TypeInsuranceRepository = typeInsuranceRepository;
             AgentRepository = agentRepository;
+            StatusRepository = statusRepository;
         }
         
         public IRiskRepository RiskRepository { get; }
+        public IStatusRepository StatusRepository { get; }
         public IContractRepository ContractRepository { get; }
         public IBranchRepository BranchRepository { get; }
         public IReasonRepository ReasonRepository { get; }

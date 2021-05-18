@@ -38,7 +38,16 @@ namespace Insurance.WEBAPI.Controllers
         {
             var result = await _contractService.GetById(id);
             var contract = _mapper.Map<ContractDTO>(result);
-            return Ok(contract);
+            var ggg = new
+            {
+                Id = result.Id,
+                Date = result.DateTime,
+                Risk = result.Risk.Sum,
+                Tariff = result.Tariff.WageRate,
+                Type = result.TypeInsurance.Name,
+                Interest = result.TypeInsurance.Interest
+            };
+            return Ok(ggg);
         }
 
         [HttpPost]

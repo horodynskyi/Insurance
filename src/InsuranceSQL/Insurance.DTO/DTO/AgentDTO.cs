@@ -7,6 +7,7 @@ namespace Insurance.DTO.DTO
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string? Patronumic { get; set; }
+        public int BranchId { get; set; }
         public double Salary { get; set; }
     }
 }

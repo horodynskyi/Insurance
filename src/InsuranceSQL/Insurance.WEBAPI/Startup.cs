@@ -38,7 +38,9 @@ namespace Insurance.WEBAPI
 
             services.AddDbContext<InsuranceDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("EFConnection"),
-                b => b.MigrationsAssembly("Insurance.WEBAPI")));
+                b => b.MigrationsAssembly("Insurance.WEBAPI"))
+                
+                );
 
             #endregion
 
@@ -58,7 +60,7 @@ namespace Insurance.WEBAPI
              services.AddTransient<IContractRepository, ContractRepository>();
             services.AddTransient<IRiskRepository, RiskRepository>();
             services.AddTransient<IAgentRepository, AgentRepository>();
-            
+            services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IBranchRepository, BranchRepository>();
             services.AddTransient<ITariffRepository, TariffRepository>();
             services.AddTransient<IReasonRepository, ReasonRepository>();
@@ -81,6 +83,7 @@ namespace Insurance.WEBAPI
             services.AddTransient<IRiskService, RiskService>();
             services.AddTransient<ITariffService, TariffService>();
             services.AddTransient<ITypeInsuranceService, TypeInsuranceService>();
+            services.AddTransient<IStatusService, StatusService>();
 
             #endregion
             
