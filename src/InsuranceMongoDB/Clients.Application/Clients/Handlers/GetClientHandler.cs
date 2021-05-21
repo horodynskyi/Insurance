@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Clients.Application.Interfaces;
-using Clients.Application.Queries;
 using Clients.Application.Queries.Clients;
-using Clients.Persistance;
 using MediatR;
 using Client = Clients.Domain.Models.Client;
 

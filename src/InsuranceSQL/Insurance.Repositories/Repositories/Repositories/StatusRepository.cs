@@ -17,7 +17,7 @@ namespace Insurance.Repositories.Repositories.Repositories
 
         public new async Task<IEnumerable<Status>> Get(GenericParams parameters)
         { 
-            var result = await _context.Statuses
+            var result = await Context.Statuses
                 .Include(s => s.Reason)
                 .ToListAsync();
             return  PagedList<Status>.ToPagedList(result,
@@ -27,9 +27,9 @@ namespace Insurance.Repositories.Repositories.Repositories
 
         public new async Task Create(Status status)
         {
-            status.Reason =await _context.Reasons.FindAsync(status.Reason.Id);
-            await _context.Statuses.AddAsync(status);
-            await _context.SaveChangesAsync();
+            status.Reason =await Context.Reasons.FindAsync(status.Reason.Id);
+            await Context.Statuses.AddAsync(status);
+            await Context.SaveChangesAsync();
         }
     }
 }

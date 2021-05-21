@@ -4,6 +4,7 @@ using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Bogus.DataSets;
 using Insurance.DAL.Models;
+using Insurance.Helpers.Helpers;
 using Insurance.Helpers.Params;
 using Insurance.Infrastracture.Infrastracture;
 using Insurance.Repositories.Interfaces.IRepositories;
@@ -22,13 +23,45 @@ namespace Insurance.Repositories.Repositories.Repositories
 
         public new async Task Create(Agent agent)
         {
-            agent.Branch = await _context.Branches.FindAsync(agent.Branch.Id);
-            await _context.Agents.AddAsync(agent);
-            await _context.SaveChangesAsync();
+            agent.Branch = await Context.Branches.FindAsync(agent.Branch.Id);
+            await Context.Agents.AddAsync(agent);
+            await Context.SaveChangesAsync();
         }
         public async Task GetCountContracts(AgentParams agentParams)
         {
             
         }
+        
+        public new async Task Delete(int id)
+        {
+            var result = await Context.Set<Agent>().FindAsync(id);
+            result.Branch = new Branch();
+            result.Branch = await Context.Branches.FindAsync(result.Branch.Id);
+            Context.Set<Agent>().Remove(result);
+            await Context.SaveChangesAsync();
+        }
+
+        public new async Task<IEnumerable<Agent>> Get(GenericParams parameters)
+        {
+            var result = Context.Agents
+                .Include(x => x.Branch)
+                .AsQueryable();
+            return PagedList<Agent>.ToPagedList(result,parameters.PageNumber,parameters.PageSize);
+        }
+        public new async Task<Agent> GetById(int id)
+        {
+            return await Context.Agents
+                .Include(x => x.Branch)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            
+        }
+
+        public new async Task Update(Agent agent, int id)
+        {
+            agent.Branch = await Context.Branches.FindAsync(agent.Branch.Id);
+            Context.Agents.Update(agent);
+            await Context.SaveChangesAsync();
+        }
+        
     }
 }

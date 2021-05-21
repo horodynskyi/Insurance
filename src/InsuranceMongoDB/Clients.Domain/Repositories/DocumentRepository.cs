@@ -6,43 +6,45 @@ using MongoDB.Driver;
 
 namespace Clients.Domain.Repositories
 {
-    public class DocumentRepository:IDocumentRepository
+    public class DocumentRepository:Mongo<Document>,IDocumentRepository
     {
-        private readonly IMongoCollection<Document> _collection;
-
-        public DocumentRepository(IMongoClient client)
+        public DocumentRepository(IMongoClient client):base(client)
         {
-            var database = client.GetDatabase("Clients");
-            var collection = database.GetCollection<Document>(nameof(Document));
-            _collection = collection;
         }
-
         public async Task Create(Document documents)
         {
-            await _collection.InsertOneAsync(documents);
+            var id =  await GetId();
+            documents.Id = ++id;
+            await Collection.InsertOneAsync(documents);
+            await SetId(id);
         }
 
         public async Task<IEnumerable<Document>> Get()
         {
-            var  collection = await _collection.Find(_ => true).ToListAsync();
+            var  collection = await Collection.Find(_ => true).ToListAsync();
             return collection;
         }
 
         public async Task<Document> GetById(int id)
         {
             var filter = Builders<Document>.Filter.Eq(c => c.Id, id);
-            var collection = await _collection.Find(filter).FirstOrDefaultAsync();
+            var collection = await Collection.Find(filter).FirstOrDefaultAsync();
             return collection;
         }
 
-        public async Task Update(int id)
+        public async Task Update(Document document,int id)
         {
-            throw new System.NotImplementedException();
+            var filter = Builders<Document>.Filter.Eq(c => c.Id, id);
+            var update = Builders<Document>.Update
+                .Set(c => c, document);
+            var result = await Collection.UpdateOneAsync(filter, update);
+           
         }
 
         public async Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var filter = Builders<Document>.Filter.Eq(c => c.Id, id);
+             await Collection.DeleteOneAsync(filter);
         }
     }
 }

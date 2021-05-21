@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Company.DAL\Company.DAL.csproj" />
+      <ProjectReference Include="..\Company.Infrastracture\Company.Infrastracture.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.90" />
+    </ItemGroup>
+
+</Project>

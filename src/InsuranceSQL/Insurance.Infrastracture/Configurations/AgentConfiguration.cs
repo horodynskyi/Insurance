@@ -12,6 +12,7 @@ namespace Insurance.Infrastracture.Configurations
             builder.HasOne(x => x.Branch).WithMany();
             builder.Property(e => e.Salary)
                 .HasComputedColumnSql("([dbo].[computeSalary]([Id]))",false);
+            
         }
     }
 }

@@ -77,6 +77,18 @@ namespace Insurance.DTO.Mapper
                     map => map.MapFrom(src => src.TypeInsurance.Id))
                 .ForMember(e => e.StatusId,
                     map => map.MapFrom(src => src.Status.Id));;
+            
+            CreateMap<Contract, ContractInfoDto>()
+                .ForMember(e => e.Agent,
+                    map => map.MapFrom(src => src.Agent.FirstName +" "+ src.Agent.SecondName))
+                .ForMember(e => e.Risk,
+                    map => map.MapFrom(src => src.Risk.Sum))
+                .ForMember(e => e.Tariff,
+                    map => map.MapFrom(src => src.Tariff.WageRate))
+                .ForMember(e => e.TypeInsurance,
+                    map => map.MapFrom(src => src.TypeInsurance.Name))
+                .ForMember(e => e.Status,
+                    map => map.MapFrom(src => src.Status.Name));;
 
 
             CreateMap<StatusDTO, Status>()
@@ -100,6 +112,9 @@ namespace Insurance.DTO.Mapper
             CreateMap<Agent, AgentDTO>()
                 .ForMember(dest =>dest.BranchId,
                     map => map.MapFrom(s =>s.Branch.Id));
+            CreateMap<Agent, AgentInfoDto>()
+                .ForMember(dest =>dest.Branch,
+                    map => map.MapFrom(s =>s.Branch.Name));
             
             CreateMap<BranchDTO, Branch>();
             CreateMap<Branch, BranchDTO>();

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Insurance.WEBAPI.Controllers
 {
     [ApiController]
-    [Route("api/v1/Agent")]
+    [Route("api/v1/agent")]
     //[Authorize]
     public class AgentController : Controller
     {
@@ -35,6 +35,13 @@ namespace Insurance.WEBAPI.Controllers
             var agents = _mapper.Map<IEnumerable<AgentDTO>>(result);
             return Ok(agents);
         }
+        [HttpGet("/api/v1/Agent/Info")]
+        public async Task<IActionResult> GetAllInfo([FromQuery] AgentParams parameters)
+        {
+            var result = await _agentService.Get(parameters);
+            var agents = _mapper.Map<IEnumerable<AgentInfoDto>>(result);
+            return Ok(agents);
+        }
 
         [HttpPost]
         public async Task Add(AgentDTO agentDto)
@@ -55,6 +62,7 @@ namespace Insurance.WEBAPI.Controllers
         public async Task<IActionResult> Update(AgentDTO agentDto, int id)
         {
             var agent = _mapper.Map<Agent>(agentDto);
+            agent.Id = id;
             await _agentService.Update(agent, id);
             return Ok();
         }

@@ -9,7 +9,8 @@ namespace Insurance.Infrastracture.Configurations
         public void Configure(EntityTypeBuilder<Status> builder)
         {
             builder.HasKey(s =>s.Id);
-            builder.HasOne(x => x.Reason).WithMany();
+            builder.HasOne(x => x.Reason).WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

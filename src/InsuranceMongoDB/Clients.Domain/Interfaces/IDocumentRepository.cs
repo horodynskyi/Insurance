@@ -9,7 +9,7 @@ namespace Clients.Domain.Interfaces
         Task Create(Document documents);
         Task<IEnumerable<Document>> Get();
         Task<Document> GetById(int i);
-        Task Update(int id);
+        Task Update(Document document,int id);
         Task Delete(int id);
     }
 }

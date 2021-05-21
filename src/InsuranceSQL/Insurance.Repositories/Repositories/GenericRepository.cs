@@ -13,20 +13,20 @@ namespace Insurance.Repositories.Repositories
 {
     public class GenericRepository<TEntity,TId>:IGenericRepository<TEntity,TId> where TEntity:class
     {
-        protected readonly InsuranceDbContext _context;
+        protected readonly InsuranceDbContext Context;
         public GenericRepository(InsuranceDbContext context)
         {
-            _context = context;
+            Context = context;
         }
         public async Task Create(TEntity entity)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await Context.Set<TEntity>().AddAsync(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TEntity>> Get(GenericParams parameters)
         {
-            var result =  _context.Set<TEntity>().AsQueryable();
+            var result =  Context.Set<TEntity>().AsQueryable();
             //return 
             return  PagedList<TEntity>.ToPagedList(result,
                 parameters.PageNumber,
@@ -35,20 +35,20 @@ namespace Insurance.Repositories.Repositories
 
         public async Task<TEntity> GetById(TId id)
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
         public async Task Update(TEntity entity, TId id)
         {
-             _context.Set<TEntity>().Update(entity);
-             await _context.SaveChangesAsync();
+             Context.Set<TEntity>().Update(entity);
+             await Context.SaveChangesAsync();
         }
 
         public async Task Delete(TId id)
         {
-            var result = await _context.Set<TEntity>().FindAsync(id);
-            _context.Set<TEntity>().Remove(result);
-            await _context.SaveChangesAsync();
+            var result = await Context.Set<TEntity>().FindAsync(id);
+            Context.Set<TEntity>().Remove(result);
+            await Context.SaveChangesAsync();
         }
 
         public async Task<IQueryable<TEntity>> FindByCondition(Expression<Func<TEntity, bool>> expression)

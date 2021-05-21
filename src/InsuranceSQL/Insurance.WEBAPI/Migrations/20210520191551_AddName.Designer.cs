@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Insurance.WEBAPI.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    [Migration("20210517105907_Init")]
-    partial class Init
+    [Migration("20210520191551_AddName")]
+    partial class AddName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,6 +212,9 @@ namespace Insurance.WEBAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ReasonId")
                         .HasColumnType("int");
 
@@ -303,23 +306,28 @@ namespace Insurance.WEBAPI.Migrations
                 {
                     b.HasOne("Insurance.DAL.Models.Agent", "Agent")
                         .WithMany()
-                        .HasForeignKey("AgentId");
+                        .HasForeignKey("AgentId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.HasOne("Insurance.DAL.Models.Risk", "Risk")
                         .WithMany()
-                        .HasForeignKey("RiskId");
+                        .HasForeignKey("RiskId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.HasOne("Insurance.DAL.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId");
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Insurance.DAL.Models.Tariff", "Tariff")
                         .WithMany()
-                        .HasForeignKey("TariffId");
+                        .HasForeignKey("TariffId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.HasOne("Insurance.DAL.Models.TypeInsurance", "TypeInsurance")
                         .WithMany()
-                        .HasForeignKey("TypeInsuranceId");
+                        .HasForeignKey("TypeInsuranceId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("Agent");
 
@@ -336,7 +344,8 @@ namespace Insurance.WEBAPI.Migrations
                 {
                     b.HasOne("Insurance.DAL.Models.Reason", "Reason")
                         .WithMany()
-                        .HasForeignKey("ReasonId");
+                        .HasForeignKey("ReasonId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Reason");
                 });

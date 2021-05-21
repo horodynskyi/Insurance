@@ -10,5 +10,7 @@ namespace Clients.Domain.Interfaces
         Task<IEnumerable<Client>> GetClient();
         Task<Client> GetById(int id);
         Task Create(Client client);
+        Task Update(Client client,int id);
+        Task Delete(int id);
     }
 }

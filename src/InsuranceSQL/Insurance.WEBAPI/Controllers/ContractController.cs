@@ -32,22 +32,21 @@ namespace Insurance.WEBAPI.Controllers
             var contracts = _mapper.Map<IEnumerable<ContractDTO>>(result);
             return Ok(contracts);
         }
+        
+        [HttpGet("/api/v1/Contract/Info")]
+        public async Task<IActionResult> GetAllInfo([FromQuery] ContractParams parameters)
+        {
+            var result = await _contractService.Get(parameters);
+            var contracts = _mapper.Map<IEnumerable<ContractInfoDto>>(result);
+            return Ok(contracts);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _contractService.GetById(id);
             var contract = _mapper.Map<ContractDTO>(result);
-            var ggg = new
-            {
-                Id = result.Id,
-                Date = result.DateTime,
-                Risk = result.Risk.Sum,
-                Tariff = result.Tariff.WageRate,
-                Type = result.TypeInsurance.Name,
-                Interest = result.TypeInsurance.Interest
-            };
-            return Ok(ggg);
+            return Ok(contract);
         }
 
         [HttpPost]
@@ -62,11 +61,19 @@ namespace Insurance.WEBAPI.Controllers
             await _contractService.Create(contract);
             return Ok();
         }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _contractService.Delete(id);
+            return Ok();
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(ContractDTO contractDto, int id)
+        {
+            var contract = _mapper.Map<Contract>(contractDto);
+            contract.Id = id;
+            await _contractService.Update(contract,id);
             return Ok();
         }
     }

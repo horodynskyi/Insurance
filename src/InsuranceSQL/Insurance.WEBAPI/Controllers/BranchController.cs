@@ -61,5 +61,6 @@ namespace Insurance.WEBAPI.Controllers
             await _branchService.Delete(id);
             return  Ok();
         }
+
     }
 }
