@@ -1,0 +1,83 @@
+﻿@typeparam TEntity
+@using System.Net.Http.Json
+@using System.Reflection
+@inject HttpClient _httpClient
+@inject IJSRuntime _js
+
+
+@if (data == null)
+{
+    <text>Loading...</text>
+    _js.InvokeVoidAsync("console.log", "data");
+}
+else if (data.Length == 0)
+{
+    <text>No Records Found.</text>
+    _js.InvokeVoidAsync("console.log", data.Length);
+}
+else
+{
+    @foreach (var entity in data)
+    {
+        <div class="card-agent">
+            <RadzenCard>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>Contract № @entity.Id: </div>
+                        <b>@entity.TypeInsuranceId</b>
+                        <div style="margin-top:20px">Agent:</div>
+                        <b>@entity.AgentId</b>
+                        <br/>
+                        <RadzenImage Path="D:\ЧНУ\Cource\Insurance\src\Front-endTemplate\wwwroot\js" Style="width:100px;"/>
+                    </div>
+                    <div class="col-md-6">
+                        <div>Risk:</div>
+                        <b>@entity.RiskId</b>
+                        <div style="margin-top:20px">Tariff</div>
+                        <b>@entity.TariffId</b>
+                        <div style="margin-top:20px">Status</div>
+                        <b>@entity.StatusId</b>
+                    </div>
+                </div>
+            </RadzenCard>
+        </div>
+    }
+}
+
+@code{
+
+    [Parameter]
+    public string Url { get; set; }
+
+    [Parameter]
+    public string Page { get; set; }
+
+    ContractDTO[] data { get; set; }
+
+    public int PageSize { get; set; } = 10;
+    public int PageNumber { get; set; } = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await GetData();
+    }
+
+    //public async Task<Contract>
+
+    public async Task<ContractDTO[]> GetData()
+    {
+        return await _httpClient.GetFromJsonAsync<ContractDTO[]>(Url + $"/?PageNumber={PageNumber}&PageSize={PageSize}&OrderBy=id");
+    }
+
+    async Task Delete(string Id)
+    {
+        var entity = data.First(x => x.GetType().GetProperty("Id").GetValue(x, null).ToString() == Id);
+        await _js.InvokeVoidAsync("alert", $"{Page}/{Id}");
+        if (await _js.InvokeAsync<bool>("confirm", $"Do you want to delete record {entity.GetType().GetProperty("Id").GetValue(entity, null)}?"))
+        {
+            await _httpClient.DeleteAsync($"{Url}/{Id}");
+            await OnInitializedAsync();
+        }
+    }
+
+}

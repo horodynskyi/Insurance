@@ -1,0 +1,13 @@
+﻿.logo_text{
+    width: 400px;
+    height: 50px;
+    font-size: 36px;
+    color: whitesmoke;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logo_block{
+    background-color: #0f6674;
+}

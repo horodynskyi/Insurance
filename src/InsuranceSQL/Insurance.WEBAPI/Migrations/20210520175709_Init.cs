@@ -84,9 +84,8 @@ namespace Insurance.WEBAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Patronumic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BranchId = table.Column<int>(type: "int", nullable: true),
-                    Salary = table.Column<double>(type: "float", nullable: false)
+                    Salary = table.Column<double>(type: "float", nullable: false, computedColumnSql: "([dbo].[computeSalary]([Id]))", stored: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +114,7 @@ namespace Insurance.WEBAPI.Migrations
                         column: x => x.ReasonId,
                         principalTable: "Reasons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,7 +150,7 @@ namespace Insurance.WEBAPI.Migrations
                         column: x => x.StatusId,
                         principalTable: "Statuses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Contracts_Tariffs_TariffId",
                         column: x => x.TariffId,
@@ -184,25 +183,6 @@ namespace Insurance.WEBAPI.Migrations
                         principalTable: "Contracts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Agents",
-                columns: new[] { "Id", "BranchId", "FirstName", "Patronumic", "Salary", "SecondName" },
-                values: new object[,]
-                {
-                    { 1, null, "Maksym", "Victorovich", 0.0, "Horodynksyi" },
-                    { 12, null, "Листвич", null, 0.0, "Москаль" },
-                    { 10, null, "Немир", null, 0.0, "Дмитрук" },
-                    { 9, null, "Боримир", null, 0.0, "Мазун" },
-                    { 8, null, "Назарій", null, 0.0, "Балицька" },
-                    { 7, null, "Антонія", null, 0.0, "Цушко" },
-                    { 11, null, "Устим", null, 0.0, "Латаний" },
-                    { 5, null, "Антон", null, 0.0, "Москалюк" },
-                    { 4, null, "Зорина", null, 0.0, "Степанець" },
-                    { 3, null, "Любодар", null, 0.0, "Негода" },
-                    { 2, null, "Eugen", "Ihorovich", 0.0, "Pronin" },
-                    { 6, null, "Натан", null, 0.0, "Трублаєвська" }
                 });
 
             migrationBuilder.InsertData(
