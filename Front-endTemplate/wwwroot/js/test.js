@@ -1,3 +1,0 @@
-﻿function TEEEEST (){
-    alert("РАБОТАЕТ");
-}
