@@ -1,0 +1,17 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7a5addd_002De249_002D4da0_002D994e_002D30a1f54ce8c9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AgentTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::E2682A67-BDE2-4728-B157-70A367B6F51B::net5.0::Insurance.UnitTests.AgentTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::A95FDF55-98ED-4C1C-8228-5507FCDB7CCB::net5.0::IntegrationTests.AgentTests.ClientController_PostValidAgent_ReturnsOk&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::A95FDF55-98ED-4C1C-8228-5507FCDB7CCB::net5.0::IntegrationTests.AgentTests.ClientController_PostInvalidAgent_ReturnsBadRequest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::A95FDF55-98ED-4C1C-8228-5507FCDB7CCB::net5.0::IntegrationTests.AgentControllerTests.ClientController_GetAll_ReturnsOK&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E2682A67-BDE2-4728-B157-70A367B6F51B::net5.0::IntegrationTests.AgentControllerTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E2682A67-BDE2-4728-B157-70A367B6F51B::net5.0::Insurance.UnitTests.IntegrationTests.AgentControllerTests.ClientController_GetAll_ReturnsOK&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E2682A67-BDE2-4728-B157-70A367B6F51B::net5.0::Insurance.UnitTests.IntegrationTests.AgentControllerTests.ClientController_PostValidAgent_ReturnsOk&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E2682A67-BDE2-4728-B157-70A367B6F51B::net5.0::Insurance.UnitTests.IntegrationTests.AgentControllerTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;Project Location="D:\ЧНУ\Cource\Insurance\src\Tests\IntegrationTests" Presentation="&amp;lt;src&amp;gt;\&amp;lt;Tests&amp;gt;\&amp;lt;IntegrationTests&amp;gt;" /&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	</wpf:ResourceDictionary>

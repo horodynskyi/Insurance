@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\InsuranceSQL\Insurance.Infrastracture\Insurance.Infrastracture.csproj" />
+      <ProjectReference Include="..\..\InsuranceSQL\Insurance.WEBAPI\Insurance.WEBAPI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+     
+    </ItemGroup>
+
+</Project>

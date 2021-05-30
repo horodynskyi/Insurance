@@ -24,8 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance.Client", "Insurance.Client", "{5733586F-715A-449C-86B5-7D9C25EA787E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front-endTemplate", "..\..\Front-endTemplate\Front-endTemplate\Front-endTemplate.csproj", "{C4531A3B-7E5A-4B03-B63F-61E1AF5E500C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance.MongoDB", "Insurance.MongoDB", "{C44C3F82-A371-489C-BA63-F08AEAF1C02B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clients.Domain", "src\InsuranceMongoDB\Clients.Domain\Clients.Domain.csproj", "{10785D38-C9ED-43F2-A3E8-3D8BBF405C47}"
@@ -38,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clients.WEBAPI", "src\Insur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.UnitTests", "src\Insurance.UnitTests\Insurance.UnitTests.csproj", "{E2682A67-BDE2-4728-B157-70A367B6F51B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E7CCD225-482E-412D-989C-5046ED019018}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7CCD225-482E-412D-989C-5046ED019018}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrpcRedis", "GrpcRedis", "{FC59D99D-4BC1-4255-A705-83F973F11B39}"
 EndProject
@@ -60,9 +58,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceQueue.DAL", "src\I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceQueue.Repositories", "src\InsuranceQueue\InsuranceQueue.Repositories\InsuranceQueue.Repositories.csproj", "{E8F4DFF2-D342-4E24-9FA1-CB00EAA50BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Queue", "src\InsuranceSQL\Insurance.Queue\Insurance.Queue.csproj", "{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceQueue.Persistance", "src\InsuranceQueue\InsuranceQueue.Persistance\InsuranceQueue.Persistance.csproj", "{F282179A-2824-4AB6-B6ED-99FA6799C30D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Front-endTemplate", "src\Front-endTemplate\Front-endTemplate.csproj", "{14DE0785-A4CF-42F0-8FDD-9E331E1834D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,8 +97,9 @@ Global
 		{FBC92436-8801-4117-9E21-B696AC598CDF} = {FC59D99D-4BC1-4255-A705-83F973F11B39}
 		{BDCF1026-6881-4CF8-8077-DD07A346B82B} = {FC59D99D-4BC1-4255-A705-83F973F11B39}
 		{E8F4DFF2-D342-4E24-9FA1-CB00EAA50BC4} = {FC59D99D-4BC1-4255-A705-83F973F11B39}
-		{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D} = {2CA3AC1F-F56E-44C0-BF73-44352136D150}
 		{F282179A-2824-4AB6-B6ED-99FA6799C30D} = {FC59D99D-4BC1-4255-A705-83F973F11B39}
+		{A95FDF55-98ED-4C1C-8228-5507FCDB7CCB} = {E7CCD225-482E-412D-989C-5046ED019018}
+		{14DE0785-A4CF-42F0-8FDD-9E331E1834D1} = {5733586F-715A-449C-86B5-7D9C25EA787E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{85C0EE51-E620-48D1-BEC5-47A581B05CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -201,13 +200,17 @@ Global
 		{E8F4DFF2-D342-4E24-9FA1-CB00EAA50BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8F4DFF2-D342-4E24-9FA1-CB00EAA50BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8F4DFF2-D342-4E24-9FA1-CB00EAA50BC4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA28463D-E08E-45A7-AEF0-A1AE3FB6C30D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F282179A-2824-4AB6-B6ED-99FA6799C30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F282179A-2824-4AB6-B6ED-99FA6799C30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F282179A-2824-4AB6-B6ED-99FA6799C30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F282179A-2824-4AB6-B6ED-99FA6799C30D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95FDF55-98ED-4C1C-8228-5507FCDB7CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95FDF55-98ED-4C1C-8228-5507FCDB7CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95FDF55-98ED-4C1C-8228-5507FCDB7CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95FDF55-98ED-4C1C-8228-5507FCDB7CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14DE0785-A4CF-42F0-8FDD-9E331E1834D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14DE0785-A4CF-42F0-8FDD-9E331E1834D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14DE0785-A4CF-42F0-8FDD-9E331E1834D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14DE0785-A4CF-42F0-8FDD-9E331E1834D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

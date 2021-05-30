@@ -1,0 +1,30 @@
+﻿@page "/Contract/edit/{contractId:int}"
+@using System.Net.Http.Json
+
+@inject HttpClient _httpClient
+@inject NavigationManager uriHelper
+@inject IJSRuntime js
+
+<h3>Update</h3>
+<ContractForm ContractDto="@_contractDto"
+      OnValidSubmit="@EditContract" />
+
+@code {
+    [Parameter] public int ContractId { get; set; }
+    ContractDTO _contractDto = new ContractDTO();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _contractDto = await _httpClient.GetFromJsonAsync<ContractDTO>($"https://localhost:8080/api/v1/Contract/{ContractId}");
+    }
+
+    public async Task EditContract()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to update №{_contractDto.Id} Record?"))
+        {
+            await _httpClient.PutAsJsonAsync($"https://localhost:8080/api/v1/Contract/{ContractId}", _contractDto);
+            await js.InvokeVoidAsync("alert", $"Updated Successfully!");
+            uriHelper.NavigateTo("contract");
+        }
+    }
+}

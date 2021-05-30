@@ -1,0 +1,30 @@
+﻿@page "/branch/edit/{branchId:int}"
+@using System.Net.Http.Json
+
+@inject HttpClient _httpClient
+@inject NavigationManager uriHelper
+@inject IJSRuntime js
+
+<h3>Update</h3>
+<BranchForm BranchDto="@branchDto"
+              OnValidSubmit="@EditAgent" />
+
+@code {
+    [Parameter] public int branchId { get; set; }
+    BranchDTO branchDto = new BranchDTO();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        branchDto = await _httpClient.GetFromJsonAsync<BranchDTO>($"https://localhost:8080/api/v1/branch/{branchId}");
+    }
+
+    public async Task EditAgent()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to update №{branchDto.Id} Record?"))
+        {
+            await _httpClient.PutAsJsonAsync($"https://localhost:8080/api/v1/branch/{branchId}", branchDto);
+            await js.InvokeVoidAsync("alert", $"Updated Successfully!");
+            uriHelper.NavigateTo("branch");
+        }
+    }
+}

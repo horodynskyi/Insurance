@@ -8,3 +8,4 @@ namespace Clients.Application.Sender
         Task Send(Client client);
     }
 }
+

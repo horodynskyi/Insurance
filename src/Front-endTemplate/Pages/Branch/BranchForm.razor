@@ -1,0 +1,39 @@
+﻿@inject HttpClient _httpClient;
+<EditForm Model=@BranchDto OnValidSubmit=@OnValidSubmit>
+        <div class="banner">
+            <h1>Create new agent</h1>
+        </div>
+        <div class="item">
+            <div class="name-item">
+                <div>
+                    <div class="item">
+                        <label for="nationality">Address</label>
+                        <InputText class="form-control" @bind-Value=@BranchDto.Address />
+                    </div>
+                    <div class="item">
+                        <label for="nationality">Name of insurance</label>
+                        <InputText class="form-control" @bind-Value="@BranchDto.Name" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="name-item">
+                <div>
+                    <label for="country">Branch</label>
+                     <InputText class="form-control" @bind-Value=@BranchDto.PhoneNumber />
+                </div>
+            </div>
+        </div>
+    <div class="btn-block">
+            <button type="submit" href="/branch">Submit</button>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public BranchDTO BranchDto { get; set; }
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+}

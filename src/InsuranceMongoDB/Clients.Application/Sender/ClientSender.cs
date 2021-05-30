@@ -1,9 +1,7 @@
-﻿using System;
+﻿/*
 using System.Text;
 using System.Threading.Tasks;
 using Clients.Domain.Models;
-using Insurance.Queue.Configuration;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
@@ -31,4 +29,6 @@ namespace Clients.Application.Sender
         }
     }
 }
+*/
+
 

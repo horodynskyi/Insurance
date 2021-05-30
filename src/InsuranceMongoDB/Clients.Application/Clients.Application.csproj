@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\InsuranceSQL\Insurance.Queue\Insurance.Queue.csproj" />
       <ProjectReference Include="..\Clients.Domain\Clients.Domain.csproj" />
     </ItemGroup>
 

@@ -31,7 +31,14 @@ namespace Insurance.Repositories.Repositories.Repositories
         {
             
         }
-        
+
+        public async Task<IEnumerable<Agent>> GetAll()
+        {
+            return await Context.Agents
+                .Include(x => x.Branch)
+                .ToListAsync();
+        }
+
         public new async Task Delete(int id)
         {
             var result = await Context.Set<Agent>().FindAsync(id);
@@ -53,7 +60,6 @@ namespace Insurance.Repositories.Repositories.Repositories
             return await Context.Agents
                 .Include(x => x.Branch)
                 .FirstOrDefaultAsync(x => x.Id == id);
-            
         }
 
         public new async Task Update(Agent agent, int id)

@@ -4,7 +4,6 @@ using FluentValidation;
 using Insurance.DAL.Models;
 using Insurance.DTO.DTO;
 using Insurance.Infrastracture.Infrastracture;
-
 namespace Insurance.Validation.Validators
 {
     public class ContractValidator : GenericValidator<Contract>

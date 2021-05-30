@@ -41,5 +41,10 @@ namespace Insurance.BLL.Services
         {
             await _unitOfWork.AgentRepository.Delete(id);
         }
+
+        public async Task<IEnumerable<Agent>> GetAll()
+        {
+            return await _unitOfWork.AgentRepository.GetAll();
+        }
     }
 }

@@ -1,0 +1,92 @@
+﻿@typeparam TEntity
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Http.Extensions
+@inject HttpClient _httpClient
+@inject IJSRuntime _js
+@if (data == null)
+{
+    <text>Loading...</text>
+}
+else if (data.Length == 0)
+{
+    <text>No Records Found.</text>
+    _js.InvokeVoidAsync("console.log", data.Length);
+}
+else
+{
+    <div class="wrap">
+        <h3 class="title-5 m-b-35">data table</h3>
+        <div class="table-data__tool">
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                <tr>
+                    @foreach (var field in data[0].GetType().GetProperties())
+                    {
+                        <th>@field.Name</th>
+                    }
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (TEntity entity in data)
+                {
+                    <tr class="tr-shadow">
+                        @foreach (var field in entity.GetType().GetProperties())
+                        {
+                            <td>@field.GetValue(entity, null)</td>
+                        }
+                        <td>
+                            <div class="table-data-feature">
+                                <a href="@Page/edit/@entity.GetType().GetProperty("Id").GetValue(entity, null).ToString()">
+                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit">
+                                        </i>
+                                    </button>
+                                </a>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
+                                        @onclick="@(() => Delete(@entity.GetType().GetProperty("Id").GetValue(entity, null).ToString()))">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public string Url { get; set; }
+    [Parameter]
+    public string UrlDelete { get; set; }
+    [Parameter]
+    public string Page { get; set; }
+    TEntity[] data { get; set; }
+    public int PageSize { get; set; } = 10;
+    public int PageNumber { get; set; } = 1;
+    protected override async Task OnInitializedAsync()
+    {
+        data = await GetData();
+    }
+    public async Task<TEntity[]> GetData()
+    {
+        return await _httpClient.GetFromJsonAsync<TEntity[]>($"{Url}");
+    }
+    async Task Delete(string Id)
+    {
+        var entity = data.First(x => x.GetType().GetProperty("Id").GetValue(x, null).ToString() == Id);
+        /*await _js.InvokeVoidAsync("alert", $"{Page}/{Id}");*/
+        if (await _js.InvokeAsync<bool>("confirm", $"Do you want to delete record {entity.GetType().GetProperty("Id").GetValue(entity, null)}?"))
+        {
+            await _httpClient.DeleteAsync($"{UrlDelete}/{Id}");
+            await OnInitializedAsync();
+        }
+    }
+    async Task EditRedirect(string Id)
+    {
+    }
+
+}

@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Radzen
+@using Radzen.Blazor
+<div class="sidebar">
+    <div class="logo_block">
+        <div class="logo_text">Insurance Company</div>
+    </div>
+
+    <RadzenPanelMenu Style="width:400px">
+       
+            <RadzenPanelMenuItem Text="General" Path="/" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Contracts" Icon="description">
+            <RadzenPanelMenuItem Text="View all" Path="/Contract" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/Contract/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Agent" Icon="support_agent">
+            <RadzenPanelMenuItem Text="View all" Path="/agent" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/agent/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Branches" Icon="business">
+            <RadzenPanelMenuItem Text="View all" Path="/branch" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/branch/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Type of Insurance">
+            <RadzenPanelMenuItem Text="View all" Path="/typeinsurance" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/typeinsurance/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Reasons">
+            <RadzenPanelMenuItem Text="View all" Path="/reason" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/reason/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Tariffs">
+            <RadzenPanelMenuItem Text="View all" Path="/tariff" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/tariff/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Risks">
+            <RadzenPanelMenuItem Text="View all" Path="/risk" Icon="grid_view"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Add" Path="/risk/create" Icon="add"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Statuses">
+            <RadzenPanelMenuItem Text="View all" Path="/status" Icon="grid_view"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+    </RadzenPanelMenu>
+</div>
+
+@code {
+    
+
+}

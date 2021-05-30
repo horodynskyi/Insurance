@@ -12,5 +12,6 @@ namespace Insurance.BLL.Interfaces
         Task<Agent> GetById(int id);
         Task Update(Agent agent, int id);
         Task Delete(int id);
+        Task<IEnumerable<Agent>> GetAll();
     }
 }

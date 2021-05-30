@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using RabbitMQ.Client;
 
 namespace Clients.Application.Sender
@@ -50,3 +51,5 @@ namespace Clients.Application.Sender
         }
     }
 }
+*/
+

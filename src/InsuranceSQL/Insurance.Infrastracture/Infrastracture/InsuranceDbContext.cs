@@ -9,7 +9,7 @@ namespace Insurance.Infrastracture.Infrastracture
     {
         public InsuranceDbContext(DbContextOptions<InsuranceDbContext> options) : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         public DbSet<Contract> Contracts { get; set; }
